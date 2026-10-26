@@ -1,0 +1,22 @@
+# 密钥与证书（切勿上传）
+*.keystore
+local.key
+*.key
+
+# 构建产物
+*.apk
+*.idsig
+node_modules/
+dist/
+sdk/
+base.apk
+aligned.apk
+compiled/
+outdex/
+classes/
+classes.dex
+
+# 本地临时
+_shots/
+_backup/
+.DS_Store

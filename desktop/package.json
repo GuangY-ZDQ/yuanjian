@@ -1,0 +1,15 @@
+{
+  "name": "yuanjian",
+  "productName": "渊鉴",
+  "version": "1.1.0",
+  "description": "渊鉴 - 密码与账号管理",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-packager . 渊鉴 --platform=win32 --arch=x64 --out=dist --icon=yuanjian.ico --overwrite --asar"
+  },
+  "devDependencies": {
+    "electron": "^33.4.11",
+    "electron-packager": "^17.1.2"
+  }
+}

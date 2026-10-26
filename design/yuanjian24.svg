@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <radialGradient id="bg24" cx="0.45" cy="0.34" r="0.9"><stop offset="0" stop-color="#1E6FB8"/><stop offset="0.62" stop-color="#114C83"/><stop offset="1" stop-color="#04213B"/></radialGradient>
+    <linearGradient id="moon24" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.6" stop-color="#E8F5FF"/><stop offset="1" stop-color="#BFDFFF"/></linearGradient>
+    <linearGradient id="rip24" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9DCFF" stop-opacity="0.9"/><stop offset="1" stop-color="#A9DCFF" stop-opacity="0.05"/></linearGradient>
+  </defs>
+  <g transform="scale(0.046875)">
+    <rect width="512" height="512" rx="112" fill="url(#bg24)"/>
+    <path fill="url(#moon24)" fill-rule="evenodd" d="M256 118 A 82 82 0 1 0 256 282 A 82 82 0 1 0 256 118 Z M284 110 A 64 64 0 1 0 284 238 A 64 64 0 1 0 284 110 Z"/>
+    <path d="M84 344 C 196 316, 300 376, 428 348" fill="none" stroke="url(#rip24)" stroke-width="15" stroke-linecap="round"/>
+    <path d="M140 404 C 216 382, 280 414, 356 400" fill="none" stroke="url(#rip24)" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>
