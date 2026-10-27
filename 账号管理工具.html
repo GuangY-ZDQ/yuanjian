@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>渊鉴 · 账号管理工具</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%3E%3Cdefs%3E%3CradialGradient%20id%3D'bg24'%20cx%3D'0.45'%20cy%3D'0.34'%20r%3D'0.9'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%231E6FB8'%2F%3E%3Cstop%20offset%3D'0.62'%20stop-color%3D'%23114C83'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%2304213B'%2F%3E%3C%2FradialGradient%3E%3ClinearGradient%20id%3D'moon24'%20x1%3D'0'%20y1%3D'0'%20x2%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%23FFFFFF'%2F%3E%3Cstop%20offset%3D'0.6'%20stop-color%3D'%23E8F5FF'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%23BFDFFF'%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D'rip24'%20x1%3D'0'%20y1%3D'0'%20x2%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'%23A9DCFF'%20stop-opacity%3D'0.9'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'%23A9DCFF'%20stop-opacity%3D'0.05'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20transform%3D'scale%280.046875%29'%3E%3Crect%20width%3D'512'%20height%3D'512'%20rx%3D'112'%20fill%3D'url%28%23bg24%29'%2F%3E%3Cpath%20fill%3D'url%28%23moon24%29'%20fill-rule%3D'evenodd'%0A%20%20%20%20%20%20d%3D'M256%20118%20A%2082%2082%200%201%200%20256%20282%20A%2082%2082%200%201%200%20256%20118%20Z%0A%20%20%20%20%20%20%20%20%20M284%20110%20A%2064%2064%200%201%200%20284%20238%20A%2064%2064%200%201%200%20284%20110%20Z'%2F%3E%3Cpath%20d%3D'M84%20344%20C%20196%20316%2C%20300%20376%2C%20428%20348'%20fill%3D'none'%20stroke%3D'url%28%23rip24%29'%20stroke-width%3D'15'%20stroke-linecap%3D'round'%2F%3E%3Cpath%20d%3D'M140%20404%20C%20216%20382%2C%20280%20414%2C%20356%20400'%20fill%3D'none'%20stroke%3D'url%28%23rip24%29'%20stroke-width%3D'8'%20stroke-linecap%3D'round'%20opacity%3D'0.7'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E%0A">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/misans-webfont@4.3.1/misans/misans-normal/result.css">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/misans-webfont@4.3.1/misans/misans-semibold/result.css">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('vault.theme')||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}</script>
+<style>
+:root{
+  --bg:#F5F6F8; --bg-2:#FFFFFF; --bg-3:#EBEFF4; --bg-4:#DDE3EA;
+  --line:#D9DFE7; --line-2:#B2BCC8;
+  --text:#11151C; --text-dim:#3E4650; --text-faint:#6D7682;
+  --brass:#1468B8; --brass-2:#0D4F8C; --brass-soft:rgba(20,104,184,.12); --on-accent:#FFFFFF;
+  --ok:#157A46; --warn:#A85E10; --danger:#C0352D;
+  --ok-soft:rgba(21,122,70,.13); --danger-soft:rgba(192,53,45,.12);
+  --overlay:rgba(23,31,42,.5);
+  --radius:12px; --radius-sm:8px;
+  --shadow:0 8px 24px rgba(23,35,52,.12);
+}
+html[data-theme="dark"]{
+  --bg:#12161E; --bg-2:#1A2029; --bg-3:#242C38; --bg-4:#2E3745;
+  --line:#2C3440; --line-2:#3A4453;
+  --text:#EDE8DC; --text-dim:#9AA2AF; --text-faint:#6B7482;
+  --brass:#7CB6EC; --brass-2:#5C9BD6; --brass-soft:rgba(124,182,236,.14); --on-accent:#0B1622;
+  --ok:#66B586; --warn:#D9A25F; --danger:#D0756E;
+  --ok-soft:rgba(102,181,134,.14); --danger-soft:rgba(208,117,110,.14);
+  --overlay:rgba(9,11,15,.72);
+  --radius:12px; --radius-sm:8px;
+  --shadow:0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'MiSans Normal','MiSans',-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.5;
+  min-height:100vh; -webkit-font-smoothing:antialiased;
+}
+input,select,textarea,button{font-family:inherit;font-size:16px}
+h1,h2,h3,.view-title h2,.brand h1,.modal-head h3,.dh-title,.set-card h3{font-family:'MiSans Semibold','MiSans Normal',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif}
+
+button{cursor:pointer;border:none;background:none;color:inherit}
+.hidden{display:none!important}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace}
+
+/* ===== 屏幕容器（锁屏 / 设置 / 主应用） ===== */
+.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
+.screen-wrap{width:100%;max-width:420px}
+
+/* ===== 锁屏 & 设置卡片 ===== */
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.brand .b-icon{width:44px;height:44px;flex:0 0 44px}
+.brand h1{font-size:22px;font-weight:650;letter-spacing:.5px}
+.brand p{font-size:13px;color:var(--text-dim);margin-top:2px}
+.auth-card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.auth-card h2{font-size:17px;margin-bottom:6px}
+.auth-card .sub{font-size:13px;color:var(--text-dim);margin-bottom:18px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;color:var(--text-dim);margin-bottom:6px}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:var(--radius-sm);
+  color:var(--text);padding:11px 12px;outline:none;transition:border-color .15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--brass-2)}
+.field textarea{resize:vertical;min-height:70px}
+.pw-input{position:relative}
+.pw-input input{padding-right:44px}
+.pw-input .eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--text-dim);border-radius:6px}
+.pw-input .eye:hover{color:var(--text);background:var(--bg-3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:var(--radius-sm);padding:11px 16px;font-size:15px;font-weight:600;transition:background .15s,border-color .15s;border:1px solid transparent}
+.btn-primary{background:var(--brass);color:var(--on-accent)}
+.btn-primary:hover{background:var(--brass-2)}
+.btn-ghost{background:var(--bg-3);color:var(--text);border-color:var(--line-2)}
+.btn-ghost:hover{background:var(--bg-4)}
+.btn-danger-ghost{background:transparent;color:var(--danger);border-color:var(--line)}
+.btn-danger-ghost:hover{background:var(--danger-soft);border-color:var(--danger)}
+.btn-block{width:100%}
+.btn-sm{padding:7px 11px;font-size:13px;font-weight:500}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.hint{font-size:12px;color:var(--text-faint);margin-top:8px;line-height:1.6}
+.msg{font-size:13px;margin-top:12px;min-height:20px}
+.msg.err{color:var(--danger)}
+.msg.ok{color:var(--ok)}
+
+/* ===== 主应用布局 ===== */
+.app{min-height:100vh}
+.sidebar{
+  background:var(--bg-2);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:6px;padding:10px 14px;position:sticky;top:0;z-index:20;
+  overflow-x:auto;
+}
+.sidebar .brand{flex:0 0 auto;margin:0 10px 0 0;gap:9px}
+.sidebar .brand .b-icon{width:30px;height:30px;flex:0 0 30px}
+.sidebar .brand h1{display:none}
+.nav{display:flex;gap:4px;flex:1}
+.sidebar #nav{display:none}
+.nav-item{
+  display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:8px;white-space:nowrap;
+  font-size:14px;color:var(--text-dim);font-weight:500;
+}
+.nav-item:hover{color:var(--text);background:var(--bg-3)}
+.nav-item.active{color:var(--brass);background:var(--brass-soft)}
+.nav-item svg{width:17px;height:17px;flex:0 0 17px}
+.sidebar .lock-btn{flex:0 0 auto;margin-left:4px}
+.sidebar .theme-btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;color:var(--text-dim)}
+.sidebar .theme-btn:hover{color:var(--brass);background:var(--bg-3)}
+.main{max-width:1080px;margin:0 auto;padding:22px 16px 92px}
+
+/* 移动端底部标签栏 */
+#mobileNav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;background:var(--bg-2);border-top:1px solid var(--line);padding:5px 4px calc(5px + env(safe-area-inset-bottom))}
+#mobileNav .nav-item{flex:1;flex-direction:column;gap:3px;padding:5px 4px;font-size:11px;justify-content:center;border-radius:10px}
+#mobileNav .nav-item svg{width:20px;height:20px;flex:0 0 20px}
+#mobileNav .nav-item span{line-height:1;white-space:nowrap}
+
+/* 视图标题 */
+.view-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.view-title h2{font-size:22px;font-weight:650}
+.view-title .meta{font-size:13px;color:var(--text-dim)}
+
+/* ===== 密码生成器 ===== */
+.gen-card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:16px}
+.gen-card h3{font-size:15px;margin-bottom:14px;color:var(--text)}
+.opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-bottom:18px}
+.opt-note{font-size:12px;color:var(--text-faint);margin:2px 0 0}
+.opt label{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-dim);cursor:pointer}
+.opt input[type=checkbox]{width:17px;height:17px;accent-color:var(--brass)}
+.len-row{grid-column:1/-1}
+.len-row .len-top{display:flex;justify-content:space-between;font-size:13px;color:var(--text-dim);margin-bottom:6px}
+.len-row .len-top b{color:var(--brass);font-size:15px}
+input[type=range]{width:100%;accent-color:var(--brass);height:22px;background:transparent}
+.mode-tabs{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line-2);border-radius:8px;padding:4px;margin-bottom:18px;grid-column:1/-1}
+.mode-tab{flex:1;padding:8px;border-radius:6px;font-size:14px;color:var(--text-dim);text-align:center}
+.mode-tab.active{background:var(--brass-soft);color:var(--brass);font-weight:600}
+.gen-output{
+  background:var(--bg);border:1px solid var(--line-2);border-radius:var(--radius-sm);
+  padding:14px 16px;min-height:64px;display:flex;flex-direction:column;justify-content:center;gap:6px;
+}
+.gen-output .val{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:19px;word-break:break-all;line-height:1.3}
+.strength{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-dim)}
+.strength .bar{flex:1;height:6px;background:var(--bg-3);border-radius:3px;overflow:hidden}
+.strength .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .2s,background .2s}
+.strength .tag{flex:0 0 auto;font-weight:600}
+.gen-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+
+/* ===== 账号列表 ===== */
+.toolbar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:200px}
+.search-box input{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);color:var(--text);padding:11px 12px 11px 38px;outline:none}
+.search-box input:focus{border-color:var(--brass-2)}
+.search-box svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--text-faint)}
+.acct-list{display:flex;flex-direction:column;gap:12px}
+.acct-card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.acct-main{padding:14px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.acct-fav{
+  width:38px;height:38px;flex:0 0 38px;border-radius:9px;background:var(--bg-3);
+  display:flex;align-items:center;justify-content:center;color:var(--brass);font-weight:700;font-size:16px;
+}
+.acct-info{flex:1;min-width:0}
+.acct-info .site{font-size:15px;font-weight:600;word-break:break-all}
+.acct-info .ident{font-size:13px;color:var(--text-dim);word-break:break-all}
+.acct-actions{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;justify-content:flex-end}
+.kv-item{display:flex;flex-direction:column;gap:2px}
+.kv-item .k{font-size:12px;color:var(--text-faint)}
+.kv-item .v{font-size:14px;color:var(--text);word-break:break-all}
+.kv-item .v .pw-hidden{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:2px;color:var(--text-dim)}
+.kv-item .copy{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--brass);background:none;padding:2px 6px;border-radius:5px;align-self:flex-start}
+.kv-item .copy:hover{background:var(--brass-soft)}
+.detail-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:var(--text-dim);margin-bottom:14px;flex-wrap:wrap}
+.detail-kv{display:grid;grid-template-columns:1fr;gap:10px}
+.secq{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-top:6px}
+.secq .q{font-size:14px;color:var(--text)}
+.secq .a{font-size:13px;color:var(--text-dim);margin-top:2px;word-break:break-all}
+.hist-block{margin-top:10px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.hist-block h4{font-size:12px;color:var(--text-faint);letter-spacing:.5px}
+.hist-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.hist-reveal-all{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--brass);border:1px solid var(--line-2);border-radius:6px;padding:5px 12px;background:var(--bg-2)}
+.hist-reveal-all:hover{background:var(--brass-soft);border-color:var(--brass-2)}
+.hist-table{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr) auto;align-items:center;margin-top:6px;border:1px solid var(--line-2);border-radius:8px;overflow:hidden}
+.hcell{min-width:0;padding:8px 12px;font-size:13px;color:var(--text-dim);border-bottom:1px solid var(--line)}
+.hcell.hhead{background:var(--bg-3);font-size:12px;color:var(--text-faint);font-weight:600;letter-spacing:.5px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+.hcell.harr{text-align:center;color:var(--brass)}
+.hcell.hpw{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.5px;white-space:normal;overflow-wrap:anywhere;word-break:break-all}
+.hcell.hdate{font-size:12px;color:var(--text-faint);white-space:nowrap;text-align:right}
+.hist-table .hcell:nth-last-child(-n+4){border-bottom:none}
+.empty{background:var(--bg-2);border:1px dashed var(--line-2);border-radius:var(--radius);padding:40px 20px;text-align:center;color:var(--text-dim)}
+.empty .big{font-size:40px;margin-bottom:10px;color:var(--text-faint)}
+.empty p{font-size:14px}
+
+/* ===== 备份 & 设置 ===== */
+.set-card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:16px}
+.set-card h3{font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+.set-card h3 svg{width:19px;height:19px;color:var(--brass)}
+.set-card .desc{font-size:13px;color:var(--text-dim);margin-bottom:16px}
+.set-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.sync-status{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-dim);margin-bottom:14px;flex-wrap:wrap}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--text-faint);flex:0 0 9px}
+.dot.ok{background:var(--ok)}
+.dot.err{background:var(--danger)}
+.actions-row{display:flex;gap:10px;flex-wrap:wrap}
+.auto-sync-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-dim);margin-bottom:16px}
+.switch{position:relative;display:inline-block;width:40px;height:22px;flex:0 0 40px}
+.switch input{opacity:0;width:0;height:0}
+.switch .slider{position:absolute;inset:0;background:var(--line-2);border-radius:22px;transition:.2s}
+.switch .slider:before{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+.switch input:checked+.slider{background:var(--brass)}
+.switch input:checked+.slider:before{transform:translateX(18px)}
+.manual-zone{margin-top:16px;padding:14px;border:1px dashed var(--line-2);border-radius:var(--radius-sm);background:var(--bg-3)}
+.mz-head b{font-size:13px}
+.mz-head span{display:block;font-size:12px;color:var(--text-faint);margin-top:2px;margin-bottom:10px;line-height:1.6}
+.manual-list{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:220px;overflow:auto}
+.about-row{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.about-logo{width:52px;height:52px;flex:0 0 52px;border-radius:11px}
+.about-text b{font-size:16px}
+.about-text p{font-size:12px;color:var(--text-dim);margin-top:3px}
+.dev-list{display:flex;flex-direction:column;gap:8px;font-size:13px}
+.dev-list>div{display:flex;gap:10px;align-items:baseline}
+.dl-k{width:72px;flex:0 0 72px;color:var(--text-faint);font-size:12px}
+.manual-item{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px}
+.manual-item .mi-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.manual-item .mi-time{color:var(--text-faint);font-size:11px}
+.manual-item button{font-size:12px;padding:4px 10px}
+.note{font-size:12px;color:var(--text-faint);line-height:1.7;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.note b{color:var(--text-dim);font-weight:600}
+
+/* ===== 备份方式（二级页面） ===== */
+.method-list{display:flex;flex-direction:column;gap:12px}
+.method-row{
+  display:flex;align-items:center;gap:14px;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:var(--radius);padding:16px;
+  cursor:pointer;transition:border-color .15s,background .15s;text-align:left;width:100%;
+}
+.method-row:hover{border-color:var(--brass-2);background:var(--bg-3)}
+.method-row.current{border-color:var(--brass-2);background:var(--brass-soft)}
+.method-icon{
+  width:42px;height:42px;flex:0 0 42px;border-radius:10px;background:var(--bg-3);
+  display:flex;align-items:center;justify-content:center;color:var(--brass);
+}
+.method-info{flex:1;min-width:0}
+.method-info .mt{font-size:15px;font-weight:600}
+.method-info .md{font-size:13px;color:var(--text-dim);margin-top:2px}
+.method-info .ms{font-size:12px;color:var(--text-faint);margin-top:4px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.method-badge{flex:0 0 auto;font-size:12px;font-weight:600;color:var(--brass);border:1px solid var(--line-2);border-radius:20px;padding:4px 11px}
+.method-row.current .method-badge{background:var(--brass);color:var(--on-accent);border-color:var(--brass)}
+.method-enter{flex:0 0 auto;color:var(--text-faint)}
+.detail-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.detail-head .dh-title{font-size:18px;font-weight:650}
+.backup-desc{font-size:13px;color:var(--text-dim);margin-bottom:16px}
+
+/* ===== 弹窗内嵌生成器 ===== */
+.mg-box{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;margin-top:10px}
+.mg-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-bottom:12px}
+.mg-opts .opt label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-dim);cursor:pointer}
+.mg-opts input[type=checkbox]{width:16px;height:16px;accent-color:var(--brass)}
+.mg-num-row{grid-column:1/-1;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mg-num-row label{font-size:13px;color:var(--text-dim)}
+.mg-num-row input[type=number]{width:76px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:6px;color:var(--text);padding:7px 9px;outline:none}
+.mg-num-row input[type=number]:focus{border-color:var(--brass-2)}
+.mg-out{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;color:var(--text);word-break:break-all}
+.mg-strength{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--text-dim);flex:0 0 auto}
+.mg-strength .bar{width:70px;height:6px;background:var(--bg-3);border-radius:3px;overflow:hidden}
+.mg-strength .bar i{display:block;height:100%;width:0;background:var(--ok)}
+
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.opts-grid input[type=number]{width:92px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:6px;color:var(--text);padding:8px 10px;outline:none;font-size:16px}
+.opts-grid input[type=number]:focus{border-color:var(--brass-2)}
+.opts-grid .len-row{display:flex;align-items:center;gap:12px}
+.opts-grid .len-top{margin:0}
+
+/* 自定义词语 */
+.phrase-custom{grid-column:1/-1}
+.pc-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.pc-head label{font-size:13px;color:var(--text-dim)}
+.pc-badge{font-size:11px;color:var(--brass);background:var(--brass-soft);border-radius:20px;padding:2px 9px;font-weight:600}
+.pc-tip{font-size:12px;color:var(--text-faint);margin-left:auto}
+.phrase-custom input[type=text]{width:100%;background:var(--bg-2);border:1px solid var(--line-2);border-radius:8px;color:var(--text);padding:10px 12px;outline:none}
+.phrase-custom input[type=text]:focus{border-color:var(--brass-2)}
+.pc-preview{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px;min-height:0}
+.pc-preview .chip{font-size:12px;color:var(--text-dim);background:var(--bg-3);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.pc-preview .pc-empty{font-size:12px;color:var(--text-faint)}
+
+/* ===== 弹窗 ===== */
+.modal-overlay{position:fixed;inset:0;background:var(--overlay);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow-y:auto}
+.modal{background:var(--bg-2);border:1px solid var(--line-2);border-radius:14px;width:100%;max-width:640px;box-shadow:var(--shadow);margin:auto 0}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
+.modal-head h3{font-size:17px}
+.modal-close{width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--text-dim);border-radius:8px}
+.modal-close:hover{color:var(--text);background:var(--bg-3)}
+.modal-body{padding:20px 22px}
+.modal-body .row{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px}
+.modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:16px 22px;border-top:1px solid var(--line);flex-wrap:wrap}
+.secq-editor{margin-top:4px}
+.secq-editor .sq-item{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start}
+.secq-editor .sq-item input{flex:1;background:var(--bg);border:1px solid var(--line-2);border-radius:var(--radius-sm);color:var(--text);padding:10px 11px;outline:none}
+.secq-editor .sq-item input:focus{border-color:var(--brass-2)}
+.sq-del{width:34px;height:38px;flex:0 0 34px;display:flex;align-items:center;justify-content:center;color:var(--text-faint);border-radius:6px;border:1px solid var(--line)}
+.sq-del:hover{color:var(--danger);background:var(--danger-soft);border-color:var(--danger)}
+.add-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--brass);padding:6px 2px}
+.add-link:hover{text-decoration:underline}
+.form-hint{font-size:12px;color:var(--text-faint);margin-top:-10px;margin-bottom:14px}
+
+/* ===== 提示 ===== */
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--bg-3);border:1px solid var(--line-2);color:var(--text);padding:11px 18px;border-radius:10px;font-size:14px;box-shadow:var(--shadow);opacity:0;transition:.25s;z-index:90;pointer-events:none;max-width:88vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== 桌面端 ===== */
+@media (min-width:900px){
+  .app{display:flex;min-height:100vh}
+  .sidebar{flex:0 0 224px;flex-direction:column;align-items:stretch;position:sticky;top:0;height:100vh;padding:22px 14px;border-bottom:none;border-right:1px solid var(--line);overflow-y:auto}
+  .sidebar .brand{margin:0 6px 20px}
+  .sidebar .brand h1{display:block;font-size:18px}
+  .sidebar #nav{display:flex}
+  .nav{flex-direction:column;gap:4px}
+  .nav-item{padding:11px 12px}
+  .sidebar .lock-btn{margin:16px 4px 0;width:auto;justify-content:center}
+  .sidebar .theme-btn{margin-top:16px;width:auto}
+  #mobileNav{display:none}
+  .main{flex:1;padding:30px 32px 60px}
+  .opts-grid{grid-template-columns:1fr 1fr}
+  .detail-kv{grid-template-columns:1fr 1fr;column-gap:24px}
+  .modal-body .row{grid-template-columns:1fr 1fr}
+  .set-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 锁屏 ===== -->
+<div id="lockScreen" class="screen hidden">
+  <div class="screen-wrap">
+    <div class="brand">
+      <svg class="b-icon" viewBox="0 0 24 24" fill="none"><defs><radialGradient id="bgB" cx="0.45" cy="0.34" r="0.9"><stop offset="0" stop-color="#1E6FB8"/><stop offset="0.62" stop-color="#114C83"/><stop offset="1" stop-color="#04213B"/></radialGradient><linearGradient id="mB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.6" stop-color="#E8F5FF"/><stop offset="1" stop-color="#BFDFFF"/></linearGradient><linearGradient id="rB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9DCFF" stop-opacity="0.9"/><stop offset="1" stop-color="#A9DCFF" stop-opacity="0.05"/></linearGradient></defs><g transform="scale(0.046875)"><rect width="512" height="512" rx="112" fill="url(#bgB)"/><path fill="url(#mB)" fill-rule="evenodd" d="M256 118 A 82 82 0 1 0 256 282 A 82 82 0 1 0 256 118 Z M284 110 A 64 64 0 1 0 284 238 A 64 64 0 1 0 284 110 Z"/><path d="M84 344 C 196 316, 300 376, 428 348" fill="none" stroke="url(#rB)" stroke-width="15" stroke-linecap="round"/><path d="M140 404 C 216 382, 280 414, 356 400" fill="none" stroke="url(#rB)" stroke-width="8" stroke-linecap="round" opacity="0.7"/></g></svg>
+      <div><h1>渊鉴</h1><p>本地加密 · 云端同步</p></div>
+    </div>
+    <div class="auth-card">
+      <h2>解锁保险库</h2>
+      <p class="sub">输入主密码以读取你的账号数据</p>
+      <div class="field pw-input">
+        <label>主密码</label>
+        <input id="unlockPw" type="password" placeholder="输入主密码">
+        <button class="eye" id="unlockEye" type="button" aria-label="显示密码"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+      </div>
+      <button class="btn btn-primary btn-block" id="unlockBtn">解锁</button>
+      <p class="msg" id="unlockMsg"></p>
+      <p class="hint" id="lockHint"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 主应用 ===== -->
+<div id="app" class="app hidden">
+  <aside class="sidebar">
+    <div class="brand">
+      <svg class="b-icon" viewBox="0 0 24 24" fill="none"><defs><radialGradient id="bgB2" cx="0.45" cy="0.34" r="0.9"><stop offset="0" stop-color="#1E6FB8"/><stop offset="0.62" stop-color="#114C83"/><stop offset="1" stop-color="#04213B"/></radialGradient><linearGradient id="mB2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.6" stop-color="#E8F5FF"/><stop offset="1" stop-color="#BFDFFF"/></linearGradient><linearGradient id="rB2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9DCFF" stop-opacity="0.9"/><stop offset="1" stop-color="#A9DCFF" stop-opacity="0.05"/></linearGradient></defs><g transform="scale(0.046875)"><rect width="512" height="512" rx="112" fill="url(#bgB2)"/><path fill="url(#mB2)" fill-rule="evenodd" d="M256 118 A 82 82 0 1 0 256 282 A 82 82 0 1 0 256 118 Z M284 110 A 64 64 0 1 0 284 238 A 64 64 0 1 0 284 110 Z"/><path d="M84 344 C 196 316, 300 376, 428 348" fill="none" stroke="url(#rB2)" stroke-width="15" stroke-linecap="round"/><path d="M140 404 C 216 382, 280 414, 356 400" fill="none" stroke="url(#rB2)" stroke-width="8" stroke-linecap="round" opacity="0.7"/></g></svg>
+      <h1>渊鉴</h1>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="nav-item active" data-view="accts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>我的账号</button>
+      <button class="nav-item" data-view="gen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10 3 3 0 0 1-3 3h-2v2a2 2 0 0 1-2 2h-1v1a2 2 0 0 1-2 2 6 6 0 0 1-6-6v-1H2A2 2 0 0 1 0 17V14a2 2 0 0 1 2-2h1"/><circle cx="18" cy="5" r="1.2"/><circle cx="20.5" cy="8" r="1.2"/></svg>密码生成器</button>
+      <button class="nav-item" data-view="backup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.8 1 6.4 2.6L21 8"/><path d="M21 3v5h-5"/></svg>云端备份</button>
+      <button class="nav-item" data-view="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>设置</button>
+    </nav>
+    <button class="theme-btn" id="themeBtn" title="切换主题"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <button class="btn btn-ghost lock-btn" id="lockBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>锁定</button>
+  </aside>
+
+  <main class="main">
+    <!-- ===== 视图：密码生成器 ===== -->
+    <section class="view hidden" id="view-gen">
+      <div class="view-title"><h2>密码生成器</h2><span class="meta">生成高强度、不易被破解的密码</span></div>
+      <div class="gen-card">
+        <div class="mode-tabs" id="genModeTabs">
+          <button class="mode-tab active" data-mode="chars">随机字符</button>
+          <button class="mode-tab" data-mode="phrase">记忆短语</button>
+        </div>
+        <div id="genOptions">
+          <div class="opts-grid">
+            <div class="opt len-row">
+              <div class="len-top"><span>密码长度</span></div>
+              <input type="number" id="lenNum" min="8" max="64" value="16">
+            </div>
+            <div class="opt"><label><input type="checkbox" id="optUpper" checked>大写字母 A–Z</label></div>
+            <div class="opt"><label><input type="checkbox" id="optLower" checked>小写字母 a–z</label></div>
+            <div class="opt"><label><input type="checkbox" id="optDigits" checked>数字 0–9</label></div>
+            <div class="opt"><label><input type="checkbox" id="optSymbols" checked>符号 !@#$*_-+.（网站友好）</label></div>
+            <div class="opt"><label><input type="checkbox" id="optAmbiguous">排除易混淆字符（Il1O0o）</label></div>
+          </div>
+        </div>
+        <div id="phraseOptions" class="hidden">
+          <p class="opt-note">保留短语字母顺序，在字/词间混入随机数字与符号：例如“无敌”→wu·2#·di，既好记又更难猜。</p>
+          <div class="opts-grid">
+            <div class="opt len-row">
+              <div class="len-top"><span>词语数量</span></div>
+              <input type="number" id="phraseNum" min="2" max="10" value="4">
+            </div>
+            <div class="opt"><label><input type="checkbox" id="phraseCap" checked>首字母大写</label></div>
+            <div class="opt"><label><input type="checkbox" id="phraseSym" checked>混入符号与数字</label></div>
+            <div class="opt phrase-custom" style="grid-column:1/-1">
+              <div class="pc-head">
+                <label for="phraseCustom">自定义词语</label>
+                <span class="pc-badge">中文自动转拼音</span>
+                <span class="pc-tip">用空格 / 逗号 / 顿号分隔</span>
+              </div>
+              <input type="text" id="phraseCustom" placeholder="例如：蓝天 星辰 枫叶 远山" autocomplete="off">
+              <div class="pc-preview" id="phrasePoolPreview"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gen-output">
+          <div class="val" id="genOut"></div>
+          <div class="strength"><span class="bar"><i id="strengthBar"></i></span><span class="tag" id="strengthTag"></span></div>
+        </div>
+        <div class="gen-actions">
+          <button class="btn btn-primary" id="genBtn">重新生成</button>
+          <button class="btn btn-ghost" id="genCopy">复制密码</button>
+          <button class="btn btn-ghost" id="genToAcct">填入新账号</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 视图：我的账号 ===== -->
+    <section class="view hidden" id="view-accts">
+      <div class="view-title"><h2>我的账号</h2><span class="meta" id="acctCount">0 个账号</span></div>
+      <div class="toolbar">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+          <input id="searchInput" type="text" placeholder="搜索网站 / 账号名 / 邮箱…">
+        </div>
+        <button class="btn btn-primary" id="addAcctBtn">＋ 新增账号</button>
+      </div>
+      <div class="acct-list" id="acctList"></div>
+    </section>
+
+    <!-- ===== 视图：云端备份 ===== -->
+    <section class="view hidden" id="view-backup">
+      <div class="view-title"><h2>云端备份</h2><span class="meta">任选一种备份方式，数据本地加密，云端只存密文</span></div>
+
+      <div id="backupHome">
+        <div class="set-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.8 1 6.4 2.6L21 8"/><path d="M21 3v5h-5"/></svg>云端备份</h3>
+          <p class="desc">任选一种云端方式并进入配置。一级页面会标出当前所选方式，并记录上次备份时间。</p>
+          <div class="method-list" id="methodList"></div>
+        </div>
+        <div class="set-card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>本地备份</h3>
+          <p class="desc">把当前保险库导出为一个加密文件，可存到任意自己的网盘、U盘或邮箱。文件已用主密码加密，别人拿到也无法读取；需要时随时导入恢复。</p>
+          <div class="actions-row">
+            <button class="btn btn-primary" id="exportBtn">导出加密备份文件</button>
+            <button class="btn btn-ghost" id="importBtn">从备份文件恢复</button>
+            <input type="file" id="importFile" accept=".json,.vault" class="hidden">
+          </div>
+          <p class="note" id="localLast"></p>
+        </div>
+      </div>
+
+      <div id="backupDetail" class="hidden">
+        <div class="detail-head">
+          <button class="btn btn-ghost btn-sm" id="backupBack">← 返回方式列表</button>
+          <span class="dh-title" id="detailTitle"></span>
+        </div>
+        <div id="bdJgWd" class="hidden">
+          <div class="set-card">
+            <div class="sync-status"><span class="dot" id="syncDot"></span><span id="syncStatusText">尚未备份</span></div>
+            <div class="field" id="davUrlField"><label>WebDAV 服务器地址</label><input id="davUrl" type="text" placeholder="https://…"></div>
+            <div class="set-grid">
+              <div class="field"><label>用户名</label><input id="davUser" type="text" autocomplete="off"></div>
+              <div class="field pw-input"><label>应用密码</label><input id="davPw" type="password" autocomplete="off" placeholder="在网盘「安全选项」中生成的应用密码"><button class="eye" id="davEye" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+            </div>
+            <div class="field"><label>远程备份目录（留空则存根目录）</label><input id="davDir" type="text" placeholder="例如 /渊鉴/"></div>
+            <div class="auto-sync-row" title="打开时自动比对恢复，退出时自动上传">
+              <label class="switch"><input type="checkbox" id="davAutoSync" checked><span class="slider"></span></label>
+              <span>自动同步（打开时自动比对恢复 / 退出时自动上传）</span>
+            </div>
+            <div class="actions-row">
+              <button class="btn btn-primary" id="davSave">保存设置</button>
+              <button class="btn btn-ghost" id="davPush">上传备份</button>
+              <button class="btn btn-ghost" id="davPull">下载恢复</button>
+              <button class="btn btn-danger-ghost" id="davClear">清除配置</button>
+            </div>
+            <p class="note" id="davNote"></p>
+            <div class="manual-zone">
+              <div class="mz-head"><b>手动存档</b><span>上传为带时间戳的独立文件，不覆盖自动备份；恢复时从列表选择，避免误覆盖</span></div>
+              <div class="actions-row">
+                <button class="btn btn-ghost" id="davManualPush">手动存档上传</button>
+                <button class="btn btn-ghost" id="davManualListBtn">列出云端手动存档</button>
+              </div>
+              <div id="davManualList" class="manual-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 视图：设置 ===== -->
+    <section class="view hidden" id="view-settings">
+      <div class="view-title"><h2>设置</h2><span class="meta">安全与数据管理</span></div>
+      <div class="set-card" id="secCard">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/><path d="M12 6v6l4 2"/></svg>安全与登录</h3>
+        <p class="desc" id="secModeDesc"></p>
+        <div id="secPlainUI">
+          <p class="desc">开启后每次打开需要输入主密码，所有数据会加密保存。适合在公用设备上使用。</p>
+          <div class="set-grid">
+            <div class="field pw-input"><label>设置主密码（至少 8 位）</label><input id="setNewMpw" type="password" placeholder="设置主密码"><button class="eye" id="setNewMpwEye" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+            <div class="field pw-input"><label>确认主密码</label><input id="setNewMpw2" type="password" placeholder="再次输入"><button class="eye" id="setNewMpw2Eye" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+          </div>
+          <div class="actions-row"><button class="btn btn-primary" id="enableMpw">开启主密码保护</button></div>
+          <p class="msg" id="secPlainMsg"></p>
+        </div>
+        <div id="secEncUI" class="hidden">
+          <p class="desc">已开启主密码保护。可修改主密码，或切换回免密模式。</p>
+          <div class="set-grid">
+            <div class="field pw-input"><label>新主密码</label><input id="newMpw" type="password" placeholder="至少 8 位"><button class="eye" id="newMpwEye" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+            <div class="field pw-input"><label>确认新主密码</label><input id="newMpw2" type="password" placeholder="再次输入"><button class="eye" id="newMpw2Eye" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+          </div>
+          <div class="actions-row"><button class="btn btn-primary" id="changeMpw">更新主密码</button></div>
+          <p class="msg" id="changeMpwMsg"></p>
+          <div class="field pw-input"><label>当前主密码（用于关闭保护）</label><input id="curMpw" type="password" placeholder="输入当前主密码"><button class="eye" id="curMpwEye" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+          <div class="actions-row"><button class="btn btn-danger-ghost" id="disableMpw">关闭主密码保护（切换为免密）</button></div>
+          <p class="msg" id="secEncMsg"></p>
+        </div>
+      </div>
+      <div class="set-card hidden" id="autoLockCard">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 6.2A8.5 8.5 0 0 1 12 5c5 0 9 3.5 10 8a10 10 0 0 1-3.8 5.6"/><path d="M3 3l18 18"/><path d="M3.4 8.6A11 11 0 0 0 3 13c1 4.5 5 8 9 8a8.5 8.5 0 0 0 3.8-.9"/></svg>自动锁定</h3>
+        <p class="desc">离开一段时间后自动锁定保险库，防止他人使用。</p>
+        <div class="field"><select id="autoLockSel">
+          <option value="0">不自动锁定</option>
+          <option value="1">1 分钟后</option>
+          <option value="5" selected>5 分钟后</option>
+          <option value="15">15 分钟后</option>
+          <option value="30">30 分钟后</option>
+          <option value="60">1 小时后</option>
+        </select></div>
+      </div>
+      <div class="set-card" style="border-color:var(--danger)">
+        <h3 style="color:var(--danger)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>危险区</h3>
+        <p class="desc">清空本浏览器中保存的全部账号数据（无法撤销）。</p>
+        <div class="actions-row"><button class="btn btn-danger-ghost" id="wipeBtn">清空所有数据</button></div>
+      </div>
+      <div class="set-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>关于与存储</h3>
+        <p class="desc" style="margin-bottom:0">数据采用「多层加密，落盘永不明文」：保险库内容始终用 AES-256-GCM 加密（随机设备密钥，网页/手机与数据分键存放、电脑版密钥存于系统用户目录）；开启主密码保护后，设备密钥再由 PBKDF2(主密码, 随机盐, 60 万次迭代) 派生的密钥二次包裹，电脑版主进程还会对整份文件再做一层 AES-256-GCM。因此即使黑客拿到本地文件，也需同时具备设备密钥与主密码才能解出明文。建议配合云端同步使用，多端自动比对恢复、退出自动上传。</p>
+      </div>
+      <div class="set-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M9 16h6M12 8h.01M4 18h2V9H4z"/><path d="M6 9V5l10-2v6"/><path d="M16 3l2 2-8 10"/></svg>关于 · 开发者</h3>
+        <div class="about-row">
+          <svg class="about-logo" viewBox="0 0 24 24" fill="none"><defs><radialGradient id="bgA" cx="0.45" cy="0.34" r="0.9"><stop offset="0" stop-color="#1E6FB8"/><stop offset="0.62" stop-color="#114C83"/><stop offset="1" stop-color="#04213B"/></radialGradient><linearGradient id="mA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.6" stop-color="#E8F5FF"/><stop offset="1" stop-color="#BFDFFF"/></linearGradient><linearGradient id="rA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9DCFF" stop-opacity="0.9"/><stop offset="1" stop-color="#A9DCFF" stop-opacity="0.05"/></linearGradient></defs><g transform="scale(0.046875)"><rect width="512" height="512" rx="112" fill="url(#bgA)"/><path fill="url(#mA)" fill-rule="evenodd" d="M256 118 A 82 82 0 1 0 256 282 A 82 82 0 1 0 256 118 Z M284 110 A 64 64 0 1 0 284 238 A 64 64 0 1 0 284 110 Z"/><path d="M84 344 C 196 316, 300 376, 428 348" fill="none" stroke="url(#rA)" stroke-width="15" stroke-linecap="round"/><path d="M140 404 C 216 382, 280 414, 356 400" fill="none" stroke="url(#rA)" stroke-width="8" stroke-linecap="round" opacity="0.7"/></g></svg>
+          <div class="about-text">
+            <b>渊鉴</b> · 版本 1.1
+            <p>一款以账号管理为核心、密码生成为辅助的本地加密保险库。</p>
+          </div>
+        </div>
+        <div class="dev-list">
+          <div><span class="dl-k">开发者</span><span>泽渊</span></div>
+          <div><span class="dl-k">开发协作</span><span>AI 助手 · 豆包（Doubao）</span></div>
+          <div><span class="dl-k">设计理念</span><span>深水为鉴，明镜映渊</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <nav class="mobile-nav" id="mobileNav" aria-label="主导航">
+    <button class="nav-item active" data-view="accts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>账号</span></button>
+    <button class="nav-item" data-view="gen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10 3 3 0 0 1-3 3h-2v2a2 2 0 0 1-2 2h-1v1a2 2 0 0 1-2 2 6 6 0 0 1-6-6v-1H2A2 2 0 0 1 0 17V14a2 2 0 0 1 2-2h1"/><circle cx="18" cy="5" r="1.2"/><circle cx="20.5" cy="8" r="1.2"/></svg><span>生成</span></button>
+    <button class="nav-item" data-view="backup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.8 1 6.4 2.6L21 8"/><path d="M21 3v5h-5"/></svg><span>备份</span></button>
+    <button class="nav-item" data-view="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>设置</span></button>
+  </nav>
+</div>
+
+<!-- ===== 弹窗：账号编辑 ===== -->
+<div class="modal-overlay hidden" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">新增账号</h3>
+      <button class="modal-close" id="modalClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="field"><label>网站 / APP 名称 *</label><input id="fSite" type="text" placeholder="例如 邮箱、B站、Steam…"></div>
+        <div class="field"><label>网址（可选）</label><input id="fUrl" type="text" placeholder="https://…"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>账号名（用户名）</label><input id="fUser" type="text" placeholder="登录用户名 / 昵称"></div>
+        <div class="field"><label>生日日期（可选）</label><input id="fBirth" type="date"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>现邮箱</label><input id="fEmailCur" type="email" placeholder="当前绑定的邮箱"></div>
+        <div class="field"><label>初始邮箱（注册时邮箱）</label><input id="fEmailInit" type="email" placeholder="注册时使用的邮箱"></div>
+      </div>
+      <div class="field pw-input">
+        <label>密码</label>
+        <input id="fPw" type="password" placeholder="留空表示没有密码">
+        <button class="eye" id="fPwEye" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <button class="btn btn-ghost btn-sm" id="fPwGen" type="button" style="margin-top:8px">使用生成器生成密码</button>
+      </div>
+      <div id="modalGen" class="mg-box hidden">
+        <div class="mg-opts">
+          <div class="mg-num-row"><label>长度</label><input type="number" id="mgLen" min="6" max="40" value="14"></div>
+          <div class="opt"><label><input type="checkbox" id="mgUpper" checked>大写</label></div>
+          <div class="opt"><label><input type="checkbox" id="mgLower" checked>小写</label></div>
+          <div class="opt"><label><input type="checkbox" id="mgDigits" checked>数字</label></div>
+          <div class="opt"><label><input type="checkbox" id="mgSymbols" checked>符号</label></div>
+          <div class="opt"><label><input type="checkbox" id="mgAmbiguous">排除易混淆字符</label></div>
+        </div>
+        <div class="mg-out">
+          <span id="mgOut"></span>
+          <span class="mg-strength"><span class="bar"><i id="mgStrengthBar"></i></span><span id="mgStrengthTag"></span></span>
+        </div>
+        <div class="actions-row" style="margin-top:12px">
+          <button class="btn btn-ghost btn-sm" id="mgGen">重新生成</button>
+          <button class="btn btn-primary btn-sm" id="mgFill">填入此密码</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>密保问题（可多条）</label>
+        <div class="secq-editor" id="secqEditor"></div>
+        <button class="add-link" id="addSecqBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>添加一条密保问题</button>
+      </div>
+      <div class="field"><label>备注（自由记录）</label><textarea id="fNotes" placeholder="可写任意备注，例如：地区：中国，需要手机验证码；或有 2FA 二次验证…"></textarea></div>
+      <p class="form-hint">修改密码后，修改前的旧密码会自动存入历史记录。</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="modalCancel">取消</button>
+      <button class="btn btn-primary" id="modalSave">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 弹窗：账号历史密码 ===== -->
+<div class="modal-overlay hidden" id="histOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="histModalTitle">历史密码</h3>
+      <button class="modal-close" id="histClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body" id="histModalBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="histClose2">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 弹窗：账号详细信息（只读） ===== -->
+<div class="modal-overlay hidden" id="detailOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="detailTitle">详细信息</h3>
+      <button class="modal-close" id="detailClose"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body" id="detailBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-danger-ghost" id="detailDel">删除账号</button>
+      <button class="btn btn-ghost" id="detailCopyAll">复制全部信息</button>
+      <button class="btn btn-ghost" id="detailClose2">关闭</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://fastly.jsdelivr.net/npm/pinyin-pro@3.29.5/dist/index.min.js"></script>
+<script>
+/* ===== 工具函数 ===== */
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,9);}
+function nowISO(){return new Date().toISOString();}
+function fmtDate(iso){if(!iso)return '';try{const d=new Date(iso);return d.toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});}catch(e){return iso;}}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2200);}
+function b64(buf){const b=new Uint8Array(buf);let s='';for(let i=0;i<b.length;i+=0x8000)s+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000));return btoa(s);}
+function un64(s){const bin=atob(s);const b=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)b[i]=bin.charCodeAt(i);return b.buffer;}
+
+/* ===== 加密（双层 / 多层级，数据永不明文落盘）=====
+   设计：
+   · 层1 设备密钥 DK：随机 256 位，用于把整个保险库 JSON 做 AES-256-GCM 加密（每块随机 IV+认证标签）。
+   · 层2 主密码包裹：开启主密码保护时，用 PBKDF2(主密码,随机盐,600000次) 派生的密钥再把 DK 包裹加密；
+     免密模式下则用「设备密钥」（另一 localStorage 键 / 桌面 APPDATA）包裹 DK，与数据 blob 分键存放。
+   · 层3（仅桌面）Electron main.js 再对整份文件做一次 AES-256-GCM（密钥存 %APPDATA%）。
+   因此即使黑客拿到本地文件，也至少需要设备密钥 +（若开启保护）主密码两层才能解出明文。 */
+const KDF_ITER=600000;                  // PBKDF2-HMAC-SHA256 迭代数（OWASP 建议 ≥600k）
+const VERIFIER='DOUBAO-VAULT-OK';
+const DEVKEY_STORE='vault.devkey';      // 免密模式：设备密钥所在 localStorage 键（与数据 blob 分开）
+const CRYPTO={
+  enc:new TextEncoder(), dec:new TextDecoder(),
+  async importAES(raw){return crypto.subtle.importKey('raw',raw,'AES-GCM',false,['encrypt','decrypt']);},
+  async deriveKey(pw,saltBuf,iter){
+    const km=await crypto.subtle.importKey('raw',this.enc.encode(pw),'PBKDF2',false,['deriveKey']);
+    return crypto.subtle.deriveKey({name:'PBKDF2',salt:saltBuf,iterations:iter||KDF_ITER,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+  },
+  async deriveLegacyKey(pw,saltBuf){ // 兼容 v1 旧加密数据（310000 次）
+    const km=await crypto.subtle.importKey('raw',this.enc.encode(pw),'PBKDF2',false,['deriveKey']);
+    return crypto.subtle.deriveKey({name:'PBKDF2',salt:saltBuf,iterations:310000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+  },
+  async seal(key,json){const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,this.enc.encode(JSON.stringify(json)));return {iv:b64(iv),data:b64(ct)};},
+  async open(key,ivB64,dataB64){const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:un64(ivB64)},key,un64(dataB64));return JSON.parse(this.dec.decode(pt));},
+  async wrapBytes(K,raw){const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},K,raw);return {iv:b64(iv),data:b64(ct)};},
+  async unwrapBytes(K,ivB64,dataB64){const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:un64(ivB64)},K,un64(dataB64));return new Uint8Array(pt);}
+};
+
+/* ===== 状态 ===== */
+const storeKey='vault.v1';
+let storage=null;   // 新模型:{v,dev:{device,salt,iter,verifierIv,verifier,wrapIv,wrapped},dataIv,data}（数据始终加密）
+let key=null;       // 数据密钥 DK（CryptoKey，仅内存）
+let keyRaw=null;    // DK 原始字节（32B，用于被主密码包裹）
+let vault=null;     // {accounts:[], updatedAt}（内存明文）
+let state={view:'accts',editingId:null,genMode:'chars',autoLock:1};
+function isEnc(){ // 是否「主密码保护」（需要解锁）
+  if(storage&&storage.dev)return storage.dev.device===false;
+  return storage&&storage.mode==='enc'; // 兼容 v1
+}
+function isProtected(){return isEnc();}
+
+/* ===== 持久化 ===== */
+/* ===== 设备密钥（免密模式）：与数据分开存放 =====
+   桌面：主进程已对整份文件 AES-256-GCM（密钥在 %APPDATA%），设备密钥随 blob 密文保存（自包含，随 EXE 迁移仍可解）。
+   网页 / 手机：设备密钥存独立 localStorage 键，与数据 blob 分开。 */
+function ensureDevSecret(st){
+  if(window.NativeFile){ // 桌面
+    if(st&&st.dev&&st.dev.dv)return {dev:un64(st.dev.dv)};
+    const dev=crypto.getRandomValues(new Uint8Array(32));
+    if(st&&st.dev)st.dev.dv=b64(dev);
+    return {dev, dvB64:b64(dev)};
+  }
+  let s=null;try{s=localStorage.getItem(DEVKEY_STORE);}catch(e){}
+  if(!s){s=b64(crypto.getRandomValues(new Uint8Array(32)));try{localStorage.setItem(DEVKEY_STORE,s);}catch(e){}}
+  return {dev:un64(s)};
+}
+function clearDevSecret(){
+  if(window.NativeFile){if(storage&&storage.dev)delete storage.dev.dv;return;}
+  try{localStorage.removeItem(DEVKEY_STORE);}catch(e){}
+}
+
+/* ===== 免密模型：数据用随机 DK 加密，DK 用设备密钥包裹 ===== */
+async function makeDeviceStorage(v){
+  const dkRaw=crypto.getRandomValues(new Uint8Array(32));
+  const dk=await CRYPTO.importAES(dkRaw);
+  const es=ensureDevSecret(null);
+  const K=await CRYPTO.importAES(es.dev);
+  const w=await CRYPTO.wrapBytes(K,dkRaw);
+  const sealed=await CRYPTO.seal(dk,v);
+  const st={v:2,dev:{device:true,wrapIv:w.iv,wrapped:w.data},dataIv:sealed.iv,data:sealed.data};
+  if(es.dvB64)st.dev.dv=es.dvB64;
+  storage=st;saveStorage();
+  return {key:dk,raw:dkRaw};
+}
+async function openDeviceStorage(){
+  const es=ensureDevSecret(storage);
+  const K=await CRYPTO.importAES(es.dev);
+  const dkRaw=await CRYPTO.unwrapBytes(K,storage.dev.wrapIv,storage.dev.wrapped);
+  const dk=await CRYPTO.importAES(dkRaw);
+  return {key:dk,raw:dkRaw};
+}
+
+/* ===== 主密码模型：数据用随机 DK 加密，DK 被主密码派生密钥包裹 ===== */
+async function makePwStorage(v,pw){
+  const salt=crypto.getRandomValues(new Uint8Array(16));
+  const K=await CRYPTO.deriveKey(pw,salt);
+  let dk,dkRaw;
+  if(keyRaw){dkRaw=keyRaw;dk=key||await CRYPTO.importAES(dkRaw);}
+  else{dkRaw=crypto.getRandomValues(new Uint8Array(32));dk=await CRYPTO.importAES(dkRaw);}
+  const ver=await CRYPTO.seal(K,{ok:VERIFIER});
+  const w=await CRYPTO.wrapBytes(K,dkRaw);
+  const sealed=await CRYPTO.seal(dk,v);
+  clearDevSecret();
+  const st={v:2,dev:{device:false,salt:b64(salt),iter:KDF_ITER,verifierIv:ver.iv,verifier:ver.data,wrapIv:w.iv,wrapped:w.data},dataIv:sealed.iv,data:sealed.data};
+  storage=st;key=dk;keyRaw=dkRaw;
+  return st;
+}
+
+async function loadStorage(){
+  let raw=null;
+  if(window.NativeFile){try{const d=await window.NativeFile.load();if(d)raw=d;}catch(e){}}
+  if(raw==null){try{raw=localStorage.getItem(storeKey);}catch(e){}}
+  storage=raw?JSON.parse(raw):null;
+  if(storage&&!storage.dev&&!storage.mode){storage.mode='enc';} // 兼容 v1 加密数据
+}
+function touchLocalTs(){try{localStorage.setItem('vault.localTs',String(Date.now()));}catch(e){}}
+function localWriteTs(){try{const t=parseInt(localStorage.getItem('vault.localTs')||'0',10);if(t>0)return t;}catch(e){}const v=storageVault();const t2=Date.parse((v&&v.updatedAt)||'');return isNaN(t2)?0:t2;}
+function saveStorage(){
+  const s=JSON.stringify(storage);
+  try{localStorage.setItem(storeKey,s);}catch(e){}
+  touchLocalTs();
+  if(window.NativeFile){try{window.NativeFile.save(s);}catch(e){}}
+}
+async function persistVault(){
+  vault.updatedAt=nowISO();
+  if(!key){ // 极端兜底：无密钥时重建为免密加密模型
+    const {key:k,raw:r}=await makeDeviceStorage(vault);key=k;keyRaw=r;saveStorage();return;
+  }
+  const sealed=await CRYPTO.seal(key,vault);
+  storage.dataIv=sealed.iv; storage.data=sealed.data;
+  saveStorage();
+}
+
+/* ===== 加密 / 解密助手 ===== */
+async function makeEncStorage(v,pw){ // 兼容旧调用名：开启/更新主密码
+  return makePwStorage(v,pw);
+}
+
+/* ===== 解锁 ===== */
+async function tryUnlock(pw){
+  if(storage&&storage.salt&&!storage.dev){ // v1 旧加密数据：用旧迭代解锁后迁到新模型
+    const k=await CRYPTO.deriveLegacyKey(pw,un64(storage.salt));
+    let check;try{check=await CRYPTO.open(k,storage.verifierIv,storage.verifier);}catch(e){return false;}
+    if(!check||check.ok!==VERIFIER)return false;
+    let oldVault;try{oldVault=await CRYPTO.open(k,storage.dataIv,storage.data);}catch(e){oldVault={accounts:[],updatedAt:nowISO()};}
+    await makePwStorage(oldVault,pw); // 迁移：换成新模型（DK 被新迭代密钥包裹）
+    saveStorage();return true;
+  }
+  // 新模型主密码模式
+  if(!storage||!storage.dev||storage.dev.device!==false)return false;
+  const K=await CRYPTO.deriveKey(pw,un64(storage.dev.salt),storage.dev.iter);
+  let check;
+  try{check=await CRYPTO.open(K,storage.dev.verifierIv,storage.dev.verifier);}catch(e){return false;}
+  if(!check||check.ok!==VERIFIER)return false;
+  const dkRaw=await CRYPTO.unwrapBytes(K,storage.dev.wrapIv,storage.dev.wrapped);
+  const dk=await CRYPTO.importAES(dkRaw);
+  key=dk;keyRaw=dkRaw;
+  try{vault=await CRYPTO.open(key,storage.dataIv,storage.data);}catch(e){vault={accounts:[],updatedAt:nowISO()};}
+  return true;
+}
+
+/* ===== 屏幕切换 ===== */
+function showLock(){$$('.screen').forEach(s=>s.classList.add('hidden'));$('#app').classList.add('hidden');$('#lockScreen').classList.remove('hidden');$('#lockHint').textContent='当前为主密码保护模式。若想免密直入，请在解锁后到「设置 → 安全与登录」关闭保护。';clearInterval(autoTimer);key=null;keyRaw=null;vault=null;}
+function enterApp(){
+  $$('.screen').forEach(s=>s.classList.add('hidden'));$('#app').classList.remove('hidden');
+  $('#lockBtn').classList.toggle('hidden',!isEnc());
+  switchView('accts');renderAll();updateAutoLock();
+  autoSyncOpen();
+}
+let autoTimer=null;
+function updateAutoLock(){
+  clearInterval(autoTimer);
+  if(!isEnc())return;
+  const v=parseInt(localStorage.getItem('vault.autolock')||'5',10);
+  if(v>0){
+    autoTimer=setInterval(()=>{
+      if(!key)return;
+      const now=Date.now();
+      if(now-lastActivity>v*60000){showLock();toast('已自动锁定');}
+    },15000);
+  }
+}
+let lastActivity=Date.now();
+function bumpActivity(){lastActivity=Date.now();}
+
+/* ===== 初始加载 ===== */
+async function initStorage(){
+  await loadStorage();
+  if(!storage){ // 全新：直接建「免密加密模型」（数据已加密落盘）
+    vault={accounts:[],updatedAt:nowISO()};
+    const {key:k,raw:r}=await makeDeviceStorage(vault);
+    key=k;keyRaw=r;
+    enterApp();return;
+  }
+  if(storage.dev&&storage.dev.wrapped){ // 新模型（始终加密）
+    if(storage.dev.device===false){showLock();return;} // 主密码模式
+    try{const {key:k,raw:r}=await openDeviceStorage();key=k;keyRaw=r;
+      vault=await CRYPTO.open(key,storage.dataIv,storage.data);
+    }catch(e){vault={accounts:[],updatedAt:nowISO()};}
+    enterApp();return;
+  }
+  if(storage.mode==='plain'){ // v1 明文 → 迁移为「免密加密模型」
+    try{vault=JSON.parse(storage.data||'{"accounts":[]}');}catch(e){vault={accounts:[],updatedAt:nowISO()};}
+    const {key:k,raw:r}=await makeDeviceStorage(vault);key=k;keyRaw=r;
+    enterApp();return;
+  }
+  showLock(); // v1 主密码加密数据
+}
+
+/* ===== 导航 ===== */
+function switchView(v){
+  state.view=v;
+  $$('.view').forEach(s=>s.classList.add('hidden'));
+  $('#view-'+v).classList.remove('hidden');
+  $$('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
+  if(v==='accts')renderAccounts();
+  if(v==='backup')renderBackup();
+  if(v==='settings'){renderSecUI();$('#autoLockSel').value=parseInt(localStorage.getItem('vault.autolock')||'5',10);}
+}
+/* ===== 密码生成器 ===== */
+const SETS={upper:'ABCDEFGHIJKLMNOPQRSTUVWXYZ',lower:'abcdefghijklmnopqrstuvwxyz',digits:'0123456789',symbols:'!@#$*_-+.'};
+const AMBIGUOUS='Il1O0o';
+const WORDS=['apple','river','bridge','silver','cloud','forest','ocean','planet','rocket','garden','window','mountain','thunder','crystal','meadow','ember','falcon','harbor','island','jasmine','kettle','lantern','magnet','nectar','oriole','pixel','quartz','raven','saffron','tiger','umbrella','velvet','willow','yellow','zephyr','anchor','blossom','canyon','dolphin','echo','flame','guitar','honey','ivory','jungle','lunar','mosaic','noble','orchid','prism','quest','ripple','sunset','temple','upland','violet','wagon','xenon','zipper'];
+function randInt(max){
+  const lim=Math.floor(0xffffffff/max)*max;
+  const b=new Uint32Array(1);
+  let x;
+  do{crypto.getRandomValues(b);x=b[0];}while(x>=lim);
+  return x%max;
+}
+function selectedSets(){
+  const map=[['optUpper',SETS.upper],['optLower',SETS.lower],['optDigits',SETS.digits],['optSymbols',SETS.symbols]];
+  const excl=$('#optAmbiguous').checked;
+  return map.filter(([id])=>$('#'+id).checked)
+    .map(([,s])=>excl?s.split('').filter(c=>AMBIGUOUS.indexOf(c)<0).join(''):s)
+    .filter(s=>s.length);
+}
+function genChars(){
+  const sets=selectedSets();
+  if(!sets.length)return '';
+  const len=parseInt($('#lenNum').value,10)||16;
+  const alphabet=sets.join('');
+  const arr=new Array(len).fill(0).map(()=>alphabet[randInt(alphabet.length)]);
+  const used=new Set();
+  for(const s of sets){
+    if(!arr.some(c=>s.includes(c))){
+      let p;do{p=randInt(len);}while(used.has(p));
+      used.add(p);arr[p]=s[randInt(s.length)];
+    }
+  }
+  return arr.join('');
+}
+const PYFALLBACK={我:'wo',你:'ni',他:'ta',她:'ta',它:'ta',们:'men',这:'zhe',那:'na',是:'shi',的:'de',了:'le',一:'yi',不:'bu',在:'zai',有:'you',和:'he',人:'ren',中:'zhong',大:'da',为:'wei',上:'shang',个:'ge',国:'guo',以:'yi',要:'yao',时:'shi',来:'lai',用:'yong',生:'sheng',到:'dao',作:'zuo',地:'di',于:'yu',出:'chu',就:'jiu',分:'fen',对:'dui',成:'cheng',会:'hui',可:'ke',主:'zhu',发:'fa',年:'nian',动:'dong',同:'tong',工:'gong',也:'ye',能:'neng',下:'xia',过:'guo',子:'zi',说:'shuo',产:'chan',种:'zhong',面:'mian',而:'er',方:'fang',后:'hou',多:'duo',定:'ding',行:'xing',学:'xue',法:'fa',所:'suo',民:'min',得:'de',经:'jing',十:'shi',三:'san',之:'zhi',进:'jin',着:'zhe',部:'bu',度:'du',家:'jia',电:'dian',力:'li',里:'li',如:'ru',水:'shui',化:'hua',高:'gao',自:'zi',二:'er',理:'li',起:'qi',小:'xiao',物:'wu',现:'xian',实:'shi',加:'jia',量:'liang',都:'dou',两:'liang',体:'ti',制:'zhi',机:'ji',当:'dang',使:'shi',点:'dian',从:'cong',业:'ye',本:'ben',去:'qu',把:'ba',性:'xing',好:'hao',应:'ying',开:'kai',合:'he',还:'hai',因:'yin',由:'you',其:'qi',些:'xie',然:'ran',前:'qian',外:'wai',天:'tian',政:'zheng',四:'si',日:'ri',社:'she',义:'yi',事:'shi',平:'ping',形:'xing',相:'xiang',全:'quan',表:'biao',间:'jian',样:'yang',与:'yu',关:'guan',各:'ge',重:'zhong',新:'xin',线:'xian',内:'nei',数:'shu',正:'zheng',心:'xin',反:'fan',明:'ming',看:'kan',原:'yuan',又:'you',么:'me',利:'li',比:'bi',或:'huo',但:'dan',质:'zhi',气:'qi',第:'di',向:'xiang',道:'dao',命:'ming',此:'ci',变:'bian',条:'tiao',只:'zhi',没:'mei',结:'jie',解:'jie',问:'wen',意:'yi',建:'jian',月:'yue',公:'gong',无:'wu',系:'xi',军:'jun',很:'hen',情:'qing',者:'zhe',最:'zui',立:'li',代:'dai',想:'xiang',已:'yi',通:'tong',并:'bing',提:'ti',直:'zhi',题:'ti',党:'dang',程:'cheng',展:'zhan',五:'wu',果:'guo',料:'liao',象:'xiang',员:'yuan',革:'ge',位:'wei',入:'ru',常:'chang',文:'wen',总:'zong',次:'ci',品:'pin',式:'shi',活:'huo',设:'she',及:'ji',管:'guan',特:'te',件:'jian',长:'chang',求:'qiu',老:'lao',头:'tou',基:'ji',资:'zi',边:'bian',流:'liu',路:'lu',级:'ji',少:'shao',图:'tu',山:'shan',统:'tong',接:'jie',知:'zhi',较:'jiao',将:'jiang',组:'zu',见:'jian',计:'ji',别:'bie',手:'shou',角:'jiao',期:'qi',根:'gen',论:'lun',运:'yun',农:'nong',指:'zhi',几:'ji',九:'jiu',区:'qu',强:'qiang',放:'fang',决:'jue',西:'xi',被:'bei',干:'gan',做:'zuo',必:'bi',战:'zhan',先:'xian',回:'hui',则:'ze',任:'ren',取:'qu',据:'ju',处:'chu',队:'dui',南:'nan',给:'gei',色:'se',光:'guang',门:'men',即:'ji',保:'bao',治:'zhi',北:'bei',造:'zao',百:'bai',规:'gui',热:'re',领:'ling',七:'qi',海:'hai',口:'kou',东:'dong',导:'dao',器:'qi',压:'ya',志:'zhi',世:'shi',金:'jin',增:'zeng',争:'zheng',济:'ji',阶:'jie',油:'you',思:'si',术:'shu',极:'ji',交:'jiao',受:'shou',联:'lian',什:'shen',认:'ren',六:'liu',共:'gong',权:'quan',收:'shou',证:'zheng',改:'gai',清:'qing',美:'mei',再:'zai',采:'cai',转:'zhuan',更:'geng',单:'dan',风:'feng',切:'qie',打:'da',白:'bai',教:'jiao',速:'su',花:'hua',带:'dai',安:'an',身:'shen',车:'che',例:'li',真:'zhen',务:'wu',具:'ju',万:'wan',每:'mei',目:'mu',至:'zhi',达:'da',走:'zou',积:'ji',示:'shi',议:'yi',声:'sheng',报:'bao',斗:'dou',完:'wan',类:'lei',八:'ba',离:'li',华:'hua',名:'ming',确:'que',才:'cai',科:'ke',张:'zhang',信:'xin',马:'ma',节:'jie',话:'hua',米:'mi',整:'zheng',空:'kong',元:'yuan',况:'kuang',今:'jin',集:'ji',温:'wen',传:'chuan',土:'tu',许:'xu',步:'bu',群:'qun',广:'guang',石:'shi',记:'ji',需:'xu',段:'duan',研:'yan',界:'jie',拉:'la',林:'lin',律:'lv',叫:'jiao',且:'qie',究:'jiu',观:'guan',越:'yue',织:'zhi',装:'zhuang',影:'ying',算:'suan',低:'di',持:'chi',音:'yin',众:'zhong',书:'shu',布:'bu',复:'fu',容:'rong',儿:'er',须:'xu',际:'ji',商:'shang',非:'fei',验:'yan',连:'lian',断:'duan',深:'shen',难:'nan',近:'jin',矿:'kuang',千:'qian',周:'zhou',委:'wei',素:'su',技:'ji',备:'bei',半:'ban',办:'ban',青:'qing',省:'sheng',列:'lie',习:'xi',响:'xiang',约:'yue',支:'zhi',般:'ban',史:'shi',感:'gan',劳:'lao',便:'bian',团:'tuan',往:'wang',酸:'suan',历:'li',市:'shi',克:'ke',何:'he',除:'chu',消:'xiao',构:'gou',府:'fu',称:'cheng',太:'tai',准:'zhun',精:'jing',值:'zhi',号:'hao',率:'lv',族:'zu',维:'wei',划:'hua',选:'xuan',标:'biao',写:'xie',存:'cun',候:'hou',毛:'mao',亲:'qin',快:'kuai',效:'xiao',斯:'si',院:'yuan',查:'cha',江:'jiang',型:'xing',眼:'yan',王:'wang',按:'an',格:'ge',养:'yang',易:'yi',置:'zhi',派:'pai',层:'ceng',片:'pian',始:'shi',却:'que',专:'zhuan',状:'zhuang',育:'yu',厂:'chang',京:'jing',识:'shi',适:'shi',属:'shu',圆:'yuan',包:'bao',火:'huo',住:'zhu',调:'diao',满:'man',县:'xian',局:'ju',照:'zhao',参:'can',红:'hong',细:'xi',引:'yin',听:'ting',该:'gai',铁:'tie',价:'jia',严:'yan',龙:'long',飞:'fei',猫:'mao',狗:'gou',云:'yun',星:'xing',辰:'chen',枫:'feng',叶:'ye',远:'yuan',蓝:'lan',春:'chun',夏:'xia',秋:'qiu',冬:'dong',雨:'yu',雪:'xue',雷:'lei',草:'cao',木:'mu',香:'xiang',甜:'tian',梦:'meng',辉:'hui',彩:'cai',夜:'ye',晨:'chen',朝:'zhao',夕:'xi',霞:'xia',虹:'hong',露:'lu',霜:'shuang',雾:'wu',翠:'cui',玉:'yu',珠:'zhu',宝:'bao',岩:'yan',溪:'xi',河:'he',湖:'hu',洋:'yang',波:'bo',浪:'lang',泉:'quan',森:'sen',松:'song',柏:'bai',柳:'liu',桃:'tao',李:'li',杏:'xing',梅:'mei',兰:'lan',菊:'ju',荷:'he',萍:'ping',竹:'zhu',鹰:'ying',燕:'yan',鹤:'he',凤:'feng',凰:'huang',鹿:'lu',狐:'hu',兔:'tu',蛇:'she',虎:'hu',豹:'bao',狼:'lang',熊:'xiong',鲸:'jing',鱼:'yu',虾:'xia',蟹:'xie',螺:'luo',贝:'bei',虫:'chong',蝶:'die',蜂:'feng',蚁:'yi',蛛:'zhu',阳:'yang',阴:'yin',晴:'qing',朗:'lang',爽:'shuang',酷:'ku',帅:'shuai',勇:'yong',猛:'meng',智:'zhi',慧:'hui',仁:'ren',礼:'li',诚:'cheng',善:'shan',丽:'li',雅:'ya',俊:'jun',俏:'qiao',灵:'ling',巧:'qiao',妙:'miao',趣:'qu',乐:'le',欢:'huan',喜:'xi',悦:'yue',欣:'xin',畅:'chang',舒:'shu',缘:'yuan',福:'fu',禄:'lu',寿:'shou',康:'kang',宁:'ning',静:'jing',顺:'shun',功:'gong',胜:'sheng',奇:'qi',幻:'huan',迷:'mi',醉:'zui',醒:'xing',语:'yu',言:'yan',字:'zi',词:'ci',诗:'shi',歌:'ge',曲:'qu',舞:'wu',画:'hua',琴:'qin',棋:'qi',茶:'cha',酒:'jiu',鸟:'niao',兽:'shou',仙:'xian',神:'shen',圣:'sheng',贤:'xian',帝:'di',帅:'shuai',士:'shi',兵:'bing',卒:'zu',炮:'pao',剑:'jian',刀:'dao',枪:'qiang',弓:'gong',箭:'jian',盾:'dun',甲:'jia',盔:'kui',衣:'yi',裳:'chang',裤:'ku',鞋:'xie',帽:'mao',巾:'jin',链:'lian',环:'huan',圈:'quan',球:'qiu',绳:'sheng',网:'wang',锦:'jin',绣:'xiu',缎:'duan',绸:'chou',罗:'luo',纱:'sha',绢:'juan',帛:'bo',皮:'pi',羽:'yu',绒:'rong',棉:'mian',麻:'ma',丝:'si'};
+function zhToPy(w){
+  if(!/[\u4e00-\u9fff]/.test(w))return w.toLowerCase();
+  if(window.pinyinPro&&window.pinyinPro.pinyin){
+    try{
+      return window.pinyinPro.pinyin(w,{toneType:'none',type:'array',nonZh:'consecutive'})
+        .map(s=>s.replace(/[^a-zA-Z]/g,'')).join('').toLowerCase()||'x';
+    }catch(e){}
+  }
+  return w.split('').map(c=>PYFALLBACK[c]||'x').join('');
+}
+function pinyinUnits(t){
+  const out=[];let buf='';
+  const push=()=>{if(buf){out.push(buf.toLowerCase());buf='';}};
+  const pyOf=ch=>{
+    if(window.pinyinPro&&window.pinyinPro.pinyin){
+      try{return window.pinyinPro.pinyin(ch,{toneType:'none',type:'array',nonZh:'consecutive'}).map(s=>s.replace(/[^a-zA-Z]/g,'')).join('')||'';}catch(e){return '';}
+    }
+    return '';
+  };
+  for(const ch of t){
+    if(/[\u4e00-\u9fff]/.test(ch)){
+      push();
+      const s=pyOf(ch)||PYFALLBACK[ch]||'';
+      out.push((s||'x').toLowerCase());
+    }else buf+=ch;
+  }
+  push();
+  return out.filter(u=>/^[a-z0-9]+$/.test(u));
+}
+function phrasePool(){
+  const custom=($('#phraseCustom').value||'').split(/[\s,，、]+/).map(s=>s.trim()).filter(Boolean);
+  if(!custom.length)return WORDS.slice();
+  const pool=[];
+  for(const w of custom)pool.push(...pinyinUnits(w));
+  if(!pool.length)return WORDS.slice();
+  const n=phraseCount();
+  if(pool.length<n){
+    const fill=WORDS.slice().filter(w=>pool.indexOf(w)<0);
+    while(pool.length<n&&fill.length)pool.push(fill.splice(randInt(fill.length),1)[0]);
+  }
+  return pool;
+}
+function updatePhrasePreview(){
+  const el=$('#phrasePoolPreview');if(!el)return;
+  const raw=($('#phraseCustom').value||'').split(/[\s,，、]+/).map(s=>s.trim()).filter(Boolean);
+  if(!raw.length){el.innerHTML='<span class="pc-empty">未设置自定义词语，将使用内置词库</span>';return;}
+  el.innerHTML=raw.flatMap(w=>pinyinUnits(w)).map(u=>`<span class="chip">${esc(u)}</span>`).join('');
+}
+function phraseCount(){return Math.max(2,Math.min(10,parseInt($('#phraseNum').value,10)||4));}
+function genPhrase(){
+  const n=phraseCount();
+  const pool=phrasePool().slice();
+  if(!pool.length)return '';
+  // 保持输入顺序、无放回地取 n 个音节：每个词都是完整整体，不拆分、不乱序
+  let units=pool.slice();
+  while(units.length>n&&units.length>1)units.splice(randInt(units.length),1);
+  if($('#phraseCap').checked)units=units.map(w=>w.charAt(0).toUpperCase()+w.slice(1));
+  // 以每个拼音音节（如 wu、di）为整体，只在音节之间混入随机数字/符号/字母
+  const useSym=$('#phraseSym').checked;
+  const intrude=()=>{
+    const r=randInt(9);
+    if(useSym&&r<3)return SETS.symbols[randInt(SETS.symbols.length)];
+    if(r<5)return SETS.digits[randInt(10)];
+    return (randInt(2)?SETS.upper:SETS.lower)[randInt(26)];
+  };
+  let out='';
+  if(Math.random()<0.5)out+=intrude();
+  for(let i=0;i<units.length;i++){
+    if(i>0)for(let k=0;k<1+randInt(2);k++)out+=intrude();
+    out+=units[i];
+  }
+  if(Math.random()<0.5)out+=intrude();
+  // 确保至少含数字/符号，只加在整体两端，绝不插入音节内部
+  if(!/\d/.test(out))out=SETS.digits[randInt(10)]+out;
+  if(useSym&&!/[!@#$*_\-.+]/.test(out))out+=SETS.symbols[randInt(SETS.symbols.length)];
+  return out;
+}
+function currentMode(){return $('#genModeTabs .mode-tab.active').dataset.mode;}
+function currentGen(){
+  return currentMode()==='phrase'?genPhrase():genChars();
+}
+/* 密码强度检测：优先用主流 zxcvbn 算法（常见密码/字典/键盘序列/重复等模式匹配），
+   加载失败时回退到字符熵估算 */
+let zxv=null;
+function loadZxcvbn(cb){
+  if(window.zxcvbn){zxv=window.zxcvbn;cb&&cb();return;}
+  const urls=['https://fastly.jsdelivr.net/npm/zxcvbn@4.4.2/dist/zxcvbn.js','https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js'];
+  const tryNext=()=>{
+    if(!urls.length){zxv=null;cb&&cb();return;}
+    const s=document.createElement('script');
+    s.src=urls.shift();
+    s.async=true;
+    s.onload=()=>{zxv=window.zxcvbn||null;cb&&cb();updateStrength();};
+    s.onerror=tryNext;
+    document.head.appendChild(s);
+  };
+  tryNext();
+}
+function calcEntropy(pw){
+  if(!pw)return 0;
+  // 按实际字符长度与字符多样性估算熵：词/字越长、字符越多样，强度越高
+  const uniq=new Set(pw.split('')).size;
+  return pw.length*Math.log2(Math.max(2,uniq));
+}
+function fmtGuesses(n){
+  if(n>=1e18)return '10^'+Math.floor(Math.log10(n));
+  if(n>=1e8)return (n/1e8).toFixed(1).replace(/\.0$/,'')+' 亿';
+  if(n>=1e5)return (n/1e4).toFixed(1).replace(/\.0$/,'')+' 万';
+  if(n>=1e3)return (n/1e3).toFixed(1).replace(/\.0$/,'')+' 千';
+  return Math.round(n)+'';
+}
+function updateStrength(){
+  const pw=$('#genOut').textContent;
+  const bar=$('#strengthBar'),tag=$('#strengthTag');
+  if(!pw){bar.style.width='0';tag.textContent='';return;}
+  if(zxv){
+    const r=zxv(pw);
+    const sc=r.score;
+    const bits=Math.round(r.guesses_log10*Math.log2(10));
+    const pcts=[14,30,55,80,100];
+    bar.style.width=pcts[sc]+'%';
+    const meta=` · ${bits} bits · 破解约 ${fmtGuesses(r.guesses)} 次`;
+    const set=(c,lab)=>{bar.style.background=c;tag.textContent=lab+meta;tag.style.color=c;};
+    if(sc<=0)set('var(--danger)','极弱');
+    else if(sc===1)set('var(--danger)','弱');
+    else if(sc===2)set('var(--warn)','一般');
+    else if(sc===3)set('var(--brass)','强');
+    else set('var(--ok)','极强');
+    return;
+  }
+  const e=calcEntropy(pw);
+  const pct=Math.min(100,e/120*100);
+  bar.style.width=pct+'%';
+  if(e<40){bar.style.background='var(--danger)';tag.textContent='弱 · '+Math.round(e)+' bits';tag.style.color='var(--danger)';}
+  else if(e<70){bar.style.background='var(--warn)';tag.textContent='一般 · '+Math.round(e)+' bits';tag.style.color='var(--warn)';}
+  else if(e<100){bar.style.background='var(--brass)';tag.textContent='强 · '+Math.round(e)+' bits';tag.style.color='var(--brass)';}
+  else{bar.style.background='var(--ok)';tag.textContent='极强 · '+Math.round(e)+' bits';tag.style.color='var(--ok)';}
+}
+function regenerate(){const pw=currentGen();$('#genOut').textContent=pw||'— 请至少选择一种字符类型 —';updateStrength();}
+let lastGenPw='';
+function copyText(txt,msg){
+  const done=()=>toast(msg||'已复制');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+}
+function fallbackCopy(txt,done){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');done();}catch(e){toast('复制失败，请手动复制');}
+  document.body.removeChild(ta);
+}
+function bindGenerator(){
+  const clampNum=(sel,lo,hi)=>{const v=parseInt($(sel).value,10);if(!v||v<lo)$(sel).value=lo;else if(v>hi)$(sel).value=hi;return $(sel).value;};
+  $('#lenNum').addEventListener('input',()=>{const v=parseInt($('#lenNum').value,10);if(v>=8&&v<=64)regenerate();});
+  $('#lenNum').addEventListener('change',()=>{clampNum('#lenNum',8,64);regenerate();});
+  $('#phraseNum').addEventListener('input',()=>{const v=parseInt($('#phraseNum').value,10);if(v>=2&&v<=10)regenerate();});
+  $('#phraseNum').addEventListener('change',()=>{clampNum('#phraseNum',2,10);regenerate();});
+  ['optUpper','optLower','optDigits','optSymbols','optAmbiguous'].forEach(id=>$('#'+id).addEventListener('change',()=>{const sets=selectedSets();if(!sets.length){$('#'+id).checked=true;}regenerate();}));
+  $('#phraseCustom').addEventListener('input',()=>{if(currentMode()==='phrase'){regenerate();updatePhrasePreview();}});
+  ['phraseCap','phraseSym'].forEach(id=>$('#'+id).addEventListener('change',()=>{if(currentMode()==='phrase')regenerate();}));
+  $('#genModeTabs').addEventListener('click',e=>{
+    const b=e.target.closest('.mode-tab');if(!b)return;
+    $$('#genModeTabs .mode-tab').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const m=b.dataset.mode;
+    $('#genOptions').classList.toggle('hidden',m!=='chars');
+    $('#phraseOptions').classList.toggle('hidden',m!=='phrase');
+    if(m==='phrase')updatePhrasePreview();
+    regenerate();
+  });
+  $('#genBtn').addEventListener('click',regenerate);
+  $('#genCopy').addEventListener('click',()=>{const pw=$('#genOut').textContent;if(pw&&pw[0]!=='—'){lastGenPw=pw;copyText(pw,'密码已复制');}});
+  $('#genToAcct').addEventListener('click',()=>{
+    const pw=$('#genOut').textContent;
+    if(!pw||pw[0]==='—'){toast('请先生成密码');return;}
+    lastGenPw=pw;
+    openAcctModal(null);$('#fPw').value=pw;
+  });
+}
+
+/* ===== 屏幕与初始流程 ===== */
+function initScreens(){initStorage();}
+function bindAuth(){
+  $('#unlockBtn').addEventListener('click',async()=>{
+    const pw=$('#unlockPw').value,m=$('#unlockMsg');
+    if(!pw){m.className='msg err';m.textContent='请输入主密码。';return;}
+    $('#unlockBtn').disabled=true;m.className='msg';m.textContent='正在解锁…';
+    try{
+      const ok=await tryUnlock(pw);
+      if(ok){$('#unlockPw').value='';m.textContent='';bumpActivity();enterApp();toast('已解锁');}
+      else{m.className='msg err';m.textContent='主密码错误，无法解锁。';}
+    }catch(e){m.className='msg err';m.textContent='解锁失败：'+e.message;}
+    $('#unlockBtn').disabled=false;
+  });
+  $('#unlockPw').addEventListener('keydown',e=>{if(e.key==='Enter')$('#unlockBtn').click();});
+  $('#unlockEye').addEventListener('click',()=>{const inp=$('#unlockPw');inp.type=inp.type==='password'?'text':'password';});
+}
+function bindAppShell(){
+  const navHandler=e=>{const b=e.target.closest('.nav-item');if(b)switchView(b.dataset.view);};
+  $('#nav').addEventListener('click',navHandler);
+  $('#mobileNav').addEventListener('click',navHandler);
+  $('#lockBtn').addEventListener('click',()=>{showLock();toast('已锁定');});
+  $('#themeBtn').addEventListener('click',()=>{
+    const cur=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',cur);
+    try{localStorage.setItem('vault.theme',cur);}catch(e){}
+    toast(cur==='dark'?'已切换为夜间模式':'已切换为日间模式');
+  });
+}
+/* ===== 账号管理 ===== */
+const revealed=new Set();
+const revealedHist=new Set();
+const openCards=new Set();
+function newAcct(){return{id:uid(),site:'',url:'',username:'',currentEmail:'',initialEmail:'',password:'',security:[],birthday:'',notes:'',createdAt:nowISO(),updatedAt:nowISO(),history:[]};}
+function getAcct(id){return vault.accounts.find(a=>a.id===id);}
+
+function renderAccounts(){
+  if(!vault)return;
+  const q=($('#searchInput').value||'').trim().toLowerCase();
+  const list=vault.accounts.slice().sort((a,b)=>(a.site||'').localeCompare(b.site||'', 'zh'));
+  const filtered=list.filter(a=>{
+    if(!q)return true;
+    const hay=[a.site,a.username,a.currentEmail,a.initialEmail,a.notes].join(' ').toLowerCase();
+    return hay.includes(q);
+  });
+  $('#acctCount').textContent=filtered.length+' 个账号';
+  const box=$('#acctList');
+  if(!filtered.length){
+    box.innerHTML=`<div class="empty"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="margin:0 auto 10px;display:block;color:var(--text-faint)"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><p>${q?'没有匹配的账号':'还没有账号，点击右上角“新增账号”开始记录'}</p></div>`;
+    return;
+  }
+  box.innerHTML=filtered.map(a=>acctCard(a)).join('');
+}
+function favChar(a){const s=(a.site||'?').trim();return esc(s.charAt(0).toUpperCase()||'?');}
+function acctCard(a){
+  const histCount=(a.history||[]).length;
+  const ident=[a.username,a.currentEmail].filter(Boolean).join(' · ');
+  return `<div class="acct-card" data-id="${a.id}">
+    <div class="acct-main">
+      <div class="acct-fav">${favChar(a)}</div>
+      <div class="acct-info">
+        <div class="site">${esc(a.site||'未命名账号')}</div>
+        <div class="ident">${esc(ident||'—')}</div>
+      </div>
+      <div class="acct-actions">
+        <button class="btn btn-ghost btn-sm" data-edit="${a.id}">编辑</button>
+        <button class="btn btn-ghost btn-sm" data-hview="${a.id}">历史密码${histCount?` (${histCount})`:''}</button>
+        <button class="btn btn-ghost btn-sm" data-detail="${a.id}">详细信息</button>
+      </div>
+    </div>
+  </div>`;
+}
+function bindAcctList(){
+  const box=$('#acctList');
+  box.addEventListener('click',e=>{
+    const card=e.target.closest('.acct-card');if(!card)return;const id=card.dataset.id;
+    if(e.target.closest('[data-edit]')){openAcctModal(id);return;}
+    if(e.target.closest('[data-hview]')){openHistModal(id);return;}
+    if(e.target.closest('[data-detail]')){openDetailModal(id);return;}
+  });
+  $('#searchInput').addEventListener('input',renderAccounts);
+  $('#addAcctBtn').addEventListener('click',()=>openAcctModal(null));
+}
+async function saveVaultSilent(){try{await persistVault();}catch(e){console.error(e);}}
+
+async function delAcct(id){
+  const a=getAcct(id);if(!a)return;
+  if(!confirm(`确定删除账号「${a.site||'未命名'}」？该操作无法撤销。`))return;
+  vault.accounts=vault.accounts.filter(x=>x.id!==id);
+  await persistVault();renderAccounts();toast('已删除');
+}
+
+/* ===== 账号编辑弹窗 ===== */
+function openAcctModal(id){
+  const a=id?getAcct(id):null;
+  $('#modalTitle').textContent=a?'编辑账号':'新增账号';
+  $('#fSite').value=a?a.site||'':'';
+  $('#fUrl').value=a?a.url||'':'';
+  $('#fUser').value=a?a.username||'':'';
+  $('#fBirth').value=a?a.birthday||'':'';
+  $('#fEmailCur').value=a?a.currentEmail||'':'';
+  $('#fEmailInit').value=a?a.initialEmail||'':'';
+  $('#fPw').value=a?a.password||'':'';
+  $('#fNotes').value=a?a.notes||'':'';
+  renderSecqEditor(a?a.security:[]);
+  if(!a)$('#fPw').value=lastGenPw||'';
+  state.editingId=id||null;
+  $('#modalOverlay').classList.remove('hidden');
+  setTimeout(()=>$('#fSite').focus(),50);
+}
+function renderSecqEditor(items){
+  const itemsArr=items&&items.length?items.slice():[{q:'',a:''}];
+  const box=$('#secqEditor');
+  box.innerHTML=itemsArr.map((s,i)=>`<div class="sq-item">
+    <input class="sq-q" placeholder="问题（如：出生城市）" value="${esc(s.q)}">
+    <input class="sq-a" placeholder="答案" value="${esc(s.a)}">
+    <button class="sq-del" data-sq="${i}" title="删除"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>`).join('');
+}
+function collectSecq(){
+  const items=[];
+  $$('#secqEditor .sq-item').forEach(row=>{
+    const q=row.querySelector('.sq-q').value.trim(),a=row.querySelector('.sq-a').value.trim();
+    if(q||a)items.push({q,a});
+  });
+  return items;
+}
+/* ===== 弹窗内嵌生成器 ===== */
+function mgSelectedSets(){
+  const map=[['mgUpper',SETS.upper],['mgLower',SETS.lower],['mgDigits',SETS.digits],['mgSymbols',SETS.symbols]];
+  const excl=$('#mgAmbiguous').checked;
+  return map.filter(([id])=>$('#'+id).checked).map(([,s])=>excl?s.split('').filter(c=>AMBIGUOUS.indexOf(c)<0).join(''):s).filter(s=>s.length);
+}
+function mgGenChars(){
+  const sets=mgSelectedSets();if(!sets.length)return '';
+  const len=Math.max(6,Math.min(40,parseInt($('#mgLen').value,10)||14));
+  const alphabet=sets.join('');
+  const arr=new Array(len).fill(0).map(()=>alphabet[randInt(alphabet.length)]);
+  const used=new Set();
+  for(const s of sets){if(!arr.some(c=>s.includes(c))){let p;do{p=randInt(len);}while(used.has(p));used.add(p);arr[p]=s[randInt(s.length)];}}
+  return arr.join('');
+}
+function mgUpdate(){
+  const pw=mgGenChars();
+  $('#mgOut').textContent=pw||'请至少选择一种字符类型';
+  const e=pw?pw.length*Math.log2(mgSelectedSets().join('').length||1):0;
+  const pct=Math.min(100,e/120*100);
+  const bar=$('#mgStrengthBar');bar.style.width=pct+'%';
+  const tag=$('#mgStrengthTag');
+  if(e<40){bar.style.background='var(--danger)';tag.textContent='弱';}
+  else if(e<70){bar.style.background='var(--warn)';tag.textContent='一般';}
+  else if(e<100){bar.style.background='var(--brass)';tag.textContent='强';}
+  else{bar.style.background='var(--ok)';tag.textContent='极强';}
+}
+function bindModal(){
+  $('#modalClose').addEventListener('click',closeModal);
+  $('#modalCancel').addEventListener('click',closeModal);
+  $('#modalOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+  $('#addSecqBtn').addEventListener('click',()=>{const items=collectSecq();items.push({q:'',a:''});renderSecqEditor(items);});
+  $('#secqEditor').addEventListener('click',e=>{
+    const b=e.target.closest('.sq-del');if(!b)return;
+    const items=collectSecq();items.splice(parseInt(b.dataset.sq,10),1);renderSecqEditor(items.length?items:[{q:'',a:''}]);
+  });
+  $('#fPwEye').addEventListener('click',()=>{const inp=$('#fPw');inp.type=inp.type==='password'?'text':'password';});
+  $('#fPwGen').addEventListener('click',()=>{
+    const box=$('#modalGen');
+    const opening=box.classList.contains('hidden');
+    box.classList.toggle('hidden');
+    if(opening)mgUpdate();
+  });
+  ['mgUpper','mgLower','mgDigits','mgSymbols','mgAmbiguous'].forEach(id=>$('#'+id).addEventListener('change',()=>{const s=mgSelectedSets();if(!s.length){$('#'+id).checked=true;}mgUpdate();}));
+  $('#mgLen').addEventListener('input',()=>{const v=parseInt($('#mgLen').value,10);if(v>=6&&v<=40)mgUpdate();});
+  $('#mgGen').addEventListener('click',mgUpdate);
+  $('#mgFill').addEventListener('click',()=>{const pw=$('#mgOut').textContent;if(pw&&pw[0]!=='请'){$('#fPw').value=pw;toast('已填入密码');}});
+  $('#modalSave').addEventListener('click',async()=>{
+    const site=$('#fSite').value.trim();
+    if(!site){toast('请填写网站 / APP 名称');return;}
+    const isNew=!state.editingId;
+    let a=isNew?newAcct():getAcct(state.editingId);
+    const newPw=$('#fPw').value;
+    // 记录历史密码
+    if(!isNew&&newPw&&newPw!==a.password&&a.password){a.history.push({password:a.password,changedAt:nowISO()});}
+    Object.assign(a,{
+      site,url:$('#fUrl').value.trim(),username:$('#fUser').value.trim(),
+      currentEmail:$('#fEmailCur').value.trim(),initialEmail:$('#fEmailInit').value.trim(),
+      password:newPw,security:collectSecq(),birthday:$('#fBirth').value,notes:$('#fNotes').value,
+      updatedAt:nowISO()
+    });
+    if(isNew)vault.accounts.push(a);
+    await persistVault();
+    closeModal();renderAccounts();
+    if(isNew&&lastGenPw)lastGenPw='';
+    toast(isNew?'账号已保存':'账号已更新');
+  });
+}
+function closeModal(){$('#modalOverlay').classList.add('hidden');state.editingId=null;}
+
+/* ===== 历史密码弹窗 ===== */
+function openHistModal(id){
+  const a=getAcct(id);if(!a)return;
+  $('#histModalTitle').textContent='历史密码 · '+esc(a.site||'未命名');
+  renderHistBody(a);
+  $('#histOverlay').classList.remove('hidden');
+}
+function renderHistBody(a){
+  const box=$('#histModalBody');
+  const rev=(a.history||[]).slice().reverse();
+  const rows=rev.map((h,i)=>({old:h.password,new:i===0?(a.password||''):rev[i-1].password,date:h.changedAt}));
+  const mk=txt=>'•'.repeat(Math.max(6,Math.min(12,txt.length)));
+  if(!rows.length){box.innerHTML=`<div class="empty"><p>该账号还没有历史密码。修改密码后，旧密码会自动记录在这里。</p></div>`;return;}
+  const on=revealedHist.has(a.id);
+  box.innerHTML=`<div class="hist-block">
+    <div class="hist-head">
+      <h4>历史密码${on?'':'（默认加密隐藏）'}</h4>
+      <button class="hist-reveal-all" id="histRevealAll">${on?'隐藏密码':'显示全部密码'}</button>
+    </div>
+    <div class="hist-table">
+      <span class="hcell hhead hpw">原密码</span>
+      <span class="hcell hhead harr"></span>
+      <span class="hcell hhead hpw">修改密码</span>
+      <span class="hcell hhead hdate">修改时间</span>
+      ${rows.map(r=>[
+        `<span class="hcell hpw">${on?esc(r.old):mk(r.old)}</span>`,
+        `<span class="hcell harr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>`,
+        `<span class="hcell hpw">${on?esc(r.new):mk(r.new)}</span>`,
+        `<span class="hcell hdate">${fmtDate(r.date)}</span>`
+      ].join('')).join('')}
+    </div>
+  </div>`;
+  const btn=box.querySelector('#histRevealAll');
+  if(btn)btn.addEventListener('click',()=>{revealedHist.has(a.id)?revealedHist.delete(a.id):revealedHist.add(a.id);renderHistBody(getAcct(a.id));});
+}
+function bindHist(){
+  $('#histClose').addEventListener('click',()=>$('#histOverlay').classList.add('hidden'));
+  $('#histClose2').addEventListener('click',()=>$('#histOverlay').classList.add('hidden'));
+  $('#histOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)$('#histOverlay').classList.add('hidden');});
+}
+
+/* ===== 详细信息弹窗（只读，可复制） ===== */
+let detailId=null;
+function openDetailModal(id){
+  const a=getAcct(id);if(!a)return;
+  detailId=id;
+  $('#detailTitle').textContent='详细信息 · '+esc(a.site||'未命名账号');
+  renderDetailBody(a);
+  $('#detailOverlay').classList.remove('hidden');
+}
+function renderDetailBody(a){
+  const id=a.id;
+  const kv=(k,v,rid)=>`<div class="kv-item"><span class="k">${k}</span><span class="v">${v||'—'}</span>${rid?`<button class="copy" data-copy="${rid}" title="复制${k}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>复制</button>`:''}</div>`;
+  const show=revealed.has(id);
+  const pwVal=show&&a.password?esc(a.password):(a.password?`<span class="pw-hidden">${'•'.repeat(8)}</span>`:'<span style="color:var(--text-faint)">无密码</span>');
+  const secq=a.security&&a.security.length?`<div class="secq" style="grid-column:1/-1"><span class="k" style="display:block;font-size:12px;color:var(--text-faint);margin-bottom:6px">密保问题</span>${a.security.map(s=>`<div style="margin-bottom:6px"><div class="q">${esc(s.q||'(未填问题)')}</div><div class="a">答案：${esc(s.a||'—')}</div></div>`).join('')}</div>`:'';
+  $('#detailBody').innerHTML=`<div class="detail-top">
+    <span>只读视图，可复制各项信息；密码默认隐藏。</span>
+    ${a.password?`<button class="btn btn-ghost btn-sm" data-reveal="${id}">${show?'隐藏密码':'显示密码'}</button>`:''}
+  </div>
+  <div class="detail-kv">
+    ${kv('网站 / APP',esc(a.site||''))}
+    ${kv('网址',a.url?`<span style="word-break:break-all">${esc(a.url)}</span>`:'',a.url?'url'+id:'')}
+    ${kv('账号名',esc(a.username),a.username?'user'+id:'')}
+    ${kv('现邮箱',esc(a.currentEmail),a.currentEmail?'e1'+id:'')}
+    ${kv('初始邮箱',esc(a.initialEmail),a.initialEmail?'e2'+id:'')}
+    ${kv('密码',pwVal,a.password?'pw'+id:'')}
+    ${kv('生日',a.birthday?esc(a.birthday):'')}
+    ${a.notes?kv('备注',esc(a.notes)):''}
+    ${secq}
+  </div>`;
+}
+function closeDetail(){detailId=null;$('#detailOverlay').classList.add('hidden');}
+function bindDetail(){
+  $('#detailClose').addEventListener('click',closeDetail);
+  $('#detailClose2').addEventListener('click',closeDetail);
+  $('#detailOverlay').addEventListener('click',e=>{
+    if(e.target===e.currentTarget){closeDetail();return;}
+    const t=e.target.closest('[data-copy]');
+    if(t){
+      const id=detailId;if(!id)return;
+      const key=t.dataset.copy;let txt;
+      if(key.startsWith('pw'))txt=getAcct(id).password;
+      else if(key.startsWith('url'))txt=getAcct(id).url;
+      else if(key.startsWith('user'))txt=getAcct(id).username;
+      else if(key.startsWith('e1'))txt=getAcct(id).currentEmail;
+      else if(key.startsWith('e2'))txt=getAcct(id).initialEmail;
+      if(txt)copyText(txt,'已复制');
+      return;
+    }
+    if(e.target.closest('[data-reveal]')){
+      const id=detailId;if(!id)return;
+      revealed.has(id)?revealed.delete(id):revealed.add(id);
+      renderDetailBody(getAcct(id));
+      return;
+    }
+  });
+  $('#detailDel').addEventListener('click',async()=>{
+    if(!detailId)return;
+    const a=getAcct(detailId);if(!a)return;
+    if(!confirm(`确定删除账号「${a.site||'未命名'}」？该操作无法撤销。`))return;
+    vault.accounts=vault.accounts.filter(x=>x.id!==detailId);
+    await persistVault();renderAccounts();closeDetail();toast('已删除');
+  });
+  $('#detailCopyAll').addEventListener('click',()=>{
+    const a=getAcct(detailId);if(!a)return;
+    copyText([a.site,a.username,a.currentEmail,a.initialEmail,a.url,a.password,a.notes].filter(Boolean).join('\n'),'已复制全部信息');
+  });
+}
+
+/* ===== 本地备份（导出 / 导入） ===== */
+function validateStorage(p){
+  if(!p||typeof p!=='object')return false;
+  if(p.dev&&p.dev.wrapped)return !!(p.data&&p.dataIv);   // 新模型
+  if(p.mode==='plain')return typeof p.data==='string';    // 兼容 v1 明文
+  return !!(p.salt&&p.verifier&&p.verifierIv&&p.data&&p.dataIv); // v1 加密
+}
+function stashCurrent(){try{localStorage.setItem('vault.v1.preImport',JSON.stringify(storage));}catch(e){}}
+function downloadText(filename,text,mime){
+  if(window.AndroidSave&&typeof window.AndroidSave==='function'){
+    try{window.AndroidSave(filename,text,mime||'application/json');return;}catch(e){}
+  }
+  const blob=new Blob([text],{type:mime||'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},300);
+}
+function bindLocalBackup(){
+  $('#exportBtn').addEventListener('click',async()=>{
+    const d=new Date(),f=`vault-backup-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
+    downloadText(f,JSON.stringify(storage,null,2));
+    vault.dav=vault.dav||{};vault.dav.lastLocal=nowISO();await persistVault();
+    if($('#localLast'))$('#localLast').innerHTML='上次导出：'+fmtDate(vault.dav.lastLocal);
+    toast('已导出加密备份文件');
+  });
+  $('#importBtn').addEventListener('click',()=>$('#importFile').click());
+  $('#importFile').addEventListener('change',e=>{
+    const file=e.target.files[0];if(!file)return;
+    if(!confirm('导入备份将覆盖当前数据（当前数据会自动暂存保留）。继续？')){e.target.value='';return;}
+    const fr=new FileReader();
+    fr.onload=()=>{
+      try{
+        const parsed=JSON.parse(fr.result);
+        if(!validateStorage(parsed)){toast('备份文件格式不正确');e.target.value='';return;}
+        stashCurrent();storage=parsed;saveStorage();e.target.value='';
+        location.reload();
+      }catch(err){toast('读取失败：'+err.message);e.target.value='';}
+    };
+    fr.readAsText(file);
+  });
+}
+
+/* ===== WebDAV 云端备份 ===== */
+function davConf(){return vault.dav||{};}
+async function saveDav(method){
+  const isJg=method==='jianguoyun';
+  const url=isJg?'https://dav.jianguoyun.com/dav/':$('#davUrl').value.trim();
+  const autoSync=$('#davAutoSync').checked?'1':'0';
+  vault.dav={method,url,user:$('#davUser').value.trim(),pw:$('#davPw').value,dir:$('#davDir').value.trim(),lastSync:vault.dav?vault.dav.lastSync:'',lastLocal:vault.dav?vault.dav.lastLocal:'',autoSync,lastManual:vault.dav?vault.dav.lastManual:''};
+  await persistVault();renderBackup();toast('备份设置已保存（已随保险库加密）');
+}
+function davHeaders(){const d=davConf();return {'Authorization':'Basic '+btoa(d.user+':'+d.pw)};}
+function davBase(){const u=davConf().url.trim().replace(/\/+$/,'');return u;}
+function davFilePath(){
+  const parts=(davConf().dir||'').split('/').map(s=>s.trim()).filter(Boolean);
+  return '/'+parts.concat(['vault-backup.json']).map(encodeURIComponent).join('/');
+}
+async function ensureDavDirs(){
+  const parts=(davConf().dir||'').split('/').map(s=>s.trim()).filter(Boolean);
+  let path='';
+  for(const p of parts){
+    path+='/'+encodeURIComponent(p);
+    try{await fetch(davBase()+path,{method:'MKCOL',headers:davHeaders()});}
+    catch(e){/* 目录可能已存在，忽略 */continue;}
+  }
+}
+async function davPut(){
+  await ensureDavDirs();
+  const r=await fetch(davBase()+davFilePath(),{method:'PUT',headers:Object.assign({'Content-Type':'application/octet-stream'},davHeaders()),body:JSON.stringify(storage)});
+  if(r.status===401||r.status===403)throw new Error('WebDAV 认证失败（'+r.status+'），请检查用户名与应用密码');
+  if(!r.ok)throw new Error('上传失败（HTTP '+r.status+'）');
+}
+async function davGet(){
+  const r=await fetch(davBase()+davFilePath(),{method:'GET',headers:davHeaders()});
+  if(r.status===401||r.status===403)throw new Error('WebDAV 认证失败（'+r.status+'）');
+  if(r.status===404)throw new Error('云端还没有备份文件，请先“上传备份”');
+  if(!r.ok)throw new Error('下载失败（HTTP '+r.status+'）');
+  const parsed=JSON.parse(await r.text());
+  if(!validateStorage(parsed))throw new Error('云端备份文件格式不正确');
+  return parsed;
+}
+
+/* ===== 自动同步：打开比对恢复 / 退出自动上传 ===== */
+function davConfigured(){const d=davConf();return !!(d.url&&d.user&&d.pw);}
+function davAutoSyncEnabled(){const d=davConf();return d.autoSync!=='0';}
+function storageVault(){
+  if(storage&&storage.mode==='plain'){try{return JSON.parse(storage.data);}catch(e){}}
+  return vault;
+}
+async function davHeadTs(path){
+  try{
+    const r=await fetch(davBase()+path,{method:'HEAD',headers:davHeaders()});
+    if(r.status===404)return 0;
+    if(!r.ok)return 0;
+    const lm=Date.parse(r.headers.get('Last-Modified')||'');
+    return isNaN(lm)?0:lm;
+  }catch(e){return 0;}
+}
+async function autoSyncOpen(){
+  if(state._syncRan)return;
+  state._syncRan=true;
+  if(!davConfigured()||!davAutoSyncEnabled()||!storage)return;
+  try{
+    const cloudT=await davHeadTs(davFilePath());
+    if(!cloudT)return;                       // 云端无自动备份
+    if(cloudT<=localWriteTs())return;        // 本地更新或相同 → 以本地为准
+    const r=await fetch(davBase()+davFilePath(),{method:'GET',headers:davHeaders()});
+    if(!r.ok)return;
+    const parsed=JSON.parse(await r.text());
+    if(!validateStorage(parsed))return;
+    stashCurrent();
+    storage=parsed;saveStorage();
+    if(vault.dav){vault.dav.lastSync=nowISO();}
+    toast('检测到云端有更新的备份，已自动恢复到本地');
+    setTimeout(()=>location.reload(),600);
+  }catch(e){}
+}
+function autoSyncExit(){
+  if(!davConfigured()||!davAutoSyncEnabled()||!storage)return;
+  const d=davConf();
+  const body=JSON.stringify(storage);
+  try{
+    const xhr=new XMLHttpRequest();
+    xhr.open('PUT',davBase()+davFilePath(),false);
+    xhr.setRequestHeader('Authorization','Basic '+btoa(d.user+':'+d.pw));
+    xhr.setRequestHeader('Content-Type','application/octet-stream');
+    xhr.send(body);
+    if(xhr.status>=200&&xhr.status<400){
+      if(vault.dav)vault.dav.lastSync=nowISO();
+      touchLocalTs();
+    }
+  }catch(e){}
+}
+
+/* ===== 手动存档（独立时间戳文件，不覆盖自动备份） ===== */
+function davManualName(){
+  const d=new Date(),p=n=>String(n).padStart(2,'0');
+  return 'vault-manual-'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'-'+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds())+'.json';
+}
+function davManualPath(name){
+  const parts=(davConf().dir||'').split('/').map(s=>s.trim()).filter(Boolean);
+  return '/'+parts.concat([name]).map(encodeURIComponent).join('/');
+}
+async function davManualPut(name){
+  await ensureDavDirs();
+  const r=await fetch(davBase()+davManualPath(name),{method:'PUT',headers:Object.assign({'Content-Type':'application/octet-stream'},davHeaders()),body:JSON.stringify(storage)});
+  if(r.status===401||r.status===403)throw new Error('WebDAV 认证失败（'+r.status+'）');
+  if(!r.ok)throw new Error('上传失败（HTTP '+r.status+'）');
+  vault.dav=vault.dav||{};vault.dav.lastManual=nowISO();await persistVault();
+}
+async function davManualList(){
+  const parts=(davConf().dir||'').split('/').map(s=>s.trim()).filter(Boolean);
+  const dirPath='/'+parts.map(encodeURIComponent).join('/');
+  const r=await fetch(davBase()+dirPath,{method:'PROPFIND',headers:Object.assign({Depth:'1',Accept:'application/xml'},davHeaders())});
+  if(r.status===401||r.status===403)throw new Error('WebDAV 认证失败（'+r.status+'）');
+  if(!r.ok)throw new Error('列目录失败（HTTP '+r.status+'）');
+  const doc=new DOMParser().parseFromString(await r.text(),'text/xml');
+  const items=[];let cur=null;
+  for(const el of doc.getElementsByTagName('*')){
+    const n=el.nodeName.toLowerCase();
+    if(n==='response'||n.endsWith(':response')){
+      if(cur)items.push(cur);
+      cur={href:'',time:''};
+    }else if(cur){
+      if(n==='href'||n.endsWith(':href'))cur.href=el.textContent.trim();
+      else if(n==='getlastmodified'||n.endsWith(':getlastmodified'))cur.time=el.textContent.trim();
+    }
+  }
+  if(cur)items.push(cur);
+  return items
+    .filter(it=>{const nm=decodeURIComponent(it.href.split('/').filter(Boolean).pop()||'');return /^vault-manual-[\d-]+\.json$/.test(nm);})
+    .map(it=>{
+      const name=decodeURIComponent(it.href.split('/').filter(Boolean).pop());
+      const t=it.time?Date.parse(it.time):0;
+      return {name,path:it.href,time:isNaN(t)?0:t};
+    })
+    .sort((a,b)=>b.time-a.time);
+}
+async function davManualGet(path){
+  const url=path.startsWith('http')?path:davBase()+path;
+  const r=await fetch(url,{method:'GET',headers:davHeaders()});
+  if(r.status===401||r.status===403)throw new Error('WebDAV 认证失败（'+r.status+'）');
+  if(!r.ok)throw new Error('下载失败（HTTP '+r.status+'）');
+  const parsed=JSON.parse(await r.text());
+  if(!validateStorage(parsed))throw new Error('存档文件格式不正确');
+  return parsed;
+}
+function renderManualList(items){
+  const box=$('#davManualList');
+  if(!box)return;
+  if(!items.length){
+    box.innerHTML='<p class="note" style="margin-top:0;padding-top:0;border:none">云端暂无手动存档，可先「手动存档上传」创建一个。</p>';
+    return;
+  }
+  box.innerHTML=items.map((it,i)=>`
+    <div class="manual-item">
+      <span class="mi-name">${esc(it.name)}</span>
+      <span class="mi-time">${it.time?fmtDate(new Date(it.time).toISOString()):''}</span>
+      <button class="btn btn-ghost btn-sm" data-manual="${i}">恢复</button>
+    </div>`).join('');
+  box.querySelectorAll('[data-manual]').forEach(b=>b.addEventListener('click',async()=>{
+    const it=items[+b.dataset.manual];
+    if(!confirm('从手动存档「'+it.name+'」恢复将覆盖当前数据（当前数据会自动暂存保留）。继续？'))return;
+    try{
+      const parsed=await davManualGet(it.path);
+      stashCurrent();storage=parsed;saveStorage();
+      location.reload();
+    }catch(e){toast('恢复失败：'+e.message);}
+  }));
+}
+const BACKUP_METHODS=[
+  {id:'jianguoyun',name:'坚果云 WebDAV',desc:'免费网盘，官网注册后生成“应用密码”即可使用。',
+   icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><path d="M8 16h.01M12 16h.01M16 16h.01"/></svg>'},
+  {id:'webdav',name:'自定义 WebDAV 服务器',desc:'任意支持 WebDAV 的服务：自建 Nextcloud/OwnCloud、其他免费 WebDAV 网盘。',
+   icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.8 1 6.4 2.6L21 8"/><path d="M21 3v5h-5"/></svg>'},
+  {id:'file',name:'本地加密备份文件',desc:'导出为加密文件存到自己的网盘/U盘/邮箱，不依赖任何第三方服务。',
+   icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>'}
+];
+function davBackupMethod(){
+  const m=vault.dav&&vault.dav.method;
+  return (m==='jianguoyun'||m==='webdav')?m:'jianguoyun';
+}
+function renderMethodStatus(id){
+  const d=vault.dav||{};
+  if(id==='file'){
+    return d.lastLocal?`<span class="ms"><span class="dot ok"></span>上次导出：${fmtDate(d.lastLocal)}</span>`
+      :`<span class="ms"><span class="dot"></span>尚未导出过备份文件</span>`;
+  }
+  const configured=!!(d.url&&d.user&&d.pw);
+  const ms=[];
+  if(configured&&d.lastSync)ms.push(`<span class="ms"><span class="dot ok"></span>上次自动备份：${fmtDate(d.lastSync)}</span>`);
+  if(configured&&!d.lastSync)ms.push(`<span class="ms"><span class="dot"></span>已配置，尚未备份</span>`);
+  if(!configured)ms.push(`<span class="ms"><span class="dot"></span>未配置</span>`);
+  if(d.lastManual)ms.push(`<span class="ms"><span class="dot"></span>上次手动存档：${fmtDate(d.lastManual)}</span>`);
+  if(d.autoSync==='0')ms.push(`<span class="ms"><span class="dot"></span>自动同步已关闭</span>`);
+  return ms.join('');
+}
+function renderBackup(){
+  if(!vault)return;
+  if(curDetail)return showBackupDetail(curDetail);
+  $('#backupHome').classList.remove('hidden');
+  $('#backupDetail').classList.add('hidden');
+  if($('#localLast'))$('#localLast').innerHTML=(vault.dav&&vault.dav.lastLocal)?('上次导出：'+fmtDate(vault.dav.lastLocal)):'尚未导出过备份文件。';
+  const cur=davBackupMethod();
+  $('#methodList').innerHTML=BACKUP_METHODS.filter(m=>m.id!=='file').map(m=>{
+    const isCur=m.id===cur;
+    return `<button class="method-row${isCur?' current':''}" data-method="${m.id}">
+      <span class="method-icon">${m.icon}</span>
+      <span class="method-info"><span class="mt">${m.name}</span><span class="md">${m.desc}</span>${renderMethodStatus(m.id)}</span>
+      <span class="method-badge">${isCur?'当前':'选择'}</span>
+      <span class="method-enter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+    </button>`;
+  }).join('');
+}
+let curDetail=null;
+function showBackupDetail(method){
+  if(method==='file'){curDetail=null;renderBackup();return;}
+  curDetail=method;
+  $('#backupHome').classList.add('hidden');
+  $('#backupDetail').classList.remove('hidden');
+  const name=(BACKUP_METHODS.find(m=>m.id===method)||{}).name||'';
+  $('#detailTitle').textContent=name;
+  const d=vault.dav||{};
+  $('#bdJgWd').classList.remove('hidden');
+  const isJg=method==='jianguoyun';
+  $('#davUrl').value=isJg?'https://dav.jianguoyun.com/dav/':(d.url||'');
+  $('#davUrl').readOnly=isJg;
+  $('#davUrlField').querySelector('label').textContent=isJg?'服务器地址（坚果云固定）':'WebDAV 服务器地址';
+  $('#davUser').value=d.user||'';
+  $('#davPw').value=d.pw||'';
+  $('#davDir').value=d.dir||'';
+  const dot=$('#syncDot'),txt=$('#syncStatusText');
+  if(d.method===method&&d.lastSync){dot.className='dot ok';txt.textContent='最近备份：'+fmtDate(d.lastSync);}
+  else if(d.method===method&&d.url&&d.user){dot.className='dot ok';txt.textContent='已配置，尚未备份';}
+  else{dot.className='dot';txt.textContent='当前未选用此方式';}
+  const as=$('#davAutoSync');if(as)as.checked=d.autoSync!=='0';
+  const ml=$('#davManualList');if(ml)ml.innerHTML='';
+  $('#davNote').innerHTML=isJg
+    ?'<b>坚果云配置：</b>注册免费坚果云账号 → 登录网页端「安全选项」→「添加应用密码」→ 把生成的应用密码填在上方（<b>不是</b>登录密码）。服务器地址已固定。'
+    :'选择任意支持 WebDAV 的服务（如自建 Nextcloud / OwnCloud，或其他提供 WebDAV 的免费网盘），填入服务器地址、账号与应用密码。';
+}
+function bindBackup(){
+  $('#methodList').addEventListener('click',e=>{
+    const row=e.target.closest('.method-row');if(!row)return;
+    showBackupDetail(row.dataset.method);
+  });
+  $('#backupBack').addEventListener('click',()=>{curDetail=null;renderBackup();});
+  $('#davSave').addEventListener('click',async()=>{
+    const u=$('#davUrl').value.trim(),user=$('#davUser').value.trim(),pw=$('#davPw').value;
+    if(!u||!user||!pw){toast('请填写完整的服务器地址、用户名与应用密码');return;}
+    try{await saveDav(curDetail==='webdav'?'webdav':'jianguoyun');}catch(e){toast('保存失败：'+e.message);}
+  });
+  $('#davPush').addEventListener('click',async()=>{
+    if(!davConf().user||!davConf().url){toast('请先保存备份设置');return;}
+    try{
+      await davPut();
+      vault.dav=vault.dav||{};vault.dav.lastSync=nowISO();await persistVault();renderBackup();toast('已上传备份到云端');
+    }catch(e){
+      if(/认证|401|403/i.test(e.message)){toast('认证失败，请检查用户名与应用密码（需用“应用密码”而非登录密码）');}
+      else{toast('上传失败：'+e.message+'。若提示网络/跨域，可改用“本地加密备份文件”手动备份');}
+    }
+  });
+  $('#davPull').addEventListener('click',async()=>{
+    if(!confirm('下载云端备份将覆盖当前数据（当前数据会自动暂存保留）。继续？'))return;
+    try{
+      const parsed=await davGet();
+      stashCurrent();storage=parsed;saveStorage();
+      location.reload();
+    }catch(e){toast('下载失败：'+e.message);}
+  });
+  $('#davClear').addEventListener('click',async()=>{
+    if(!confirm('清除备份配置？'))return;
+    vault.dav={method:davBackupMethod()};await persistVault();renderBackup();toast('备份配置已清除');
+  });
+  $('#davEye').addEventListener('click',()=>{const inp=$('#davPw');inp.type=inp.type==='password'?'text':'password';});
+  $('#davAutoSync').addEventListener('change',()=>{
+    vault.dav=vault.dav||{};
+    vault.dav.autoSync=$('#davAutoSync').checked?'1':'0';
+    persistVault();
+    toast('自动同步已'+(vault.dav.autoSync==='1'?'开启':'关闭'));
+  });
+  $('#davManualPush').addEventListener('click',async()=>{
+    if(!davConfigured()){toast('请先保存备份设置');return;}
+    try{await davManualPut(davManualName());renderBackup();toast('已上传手动存档（不覆盖自动备份）');}
+    catch(e){toast('上传失败：'+e.message);}
+  });
+  $('#davManualListBtn').addEventListener('click',async()=>{
+    if(!davConfigured()){toast('请先保存备份设置');return;}
+    try{const items=await davManualList();renderManualList(items);toast(items.length?'已列出 '+items.length+' 个手动存档':'云端暂无手动存档');}
+    catch(e){toast('列目录失败：'+e.message);}
+  });
+  window.addEventListener('beforeunload',autoSyncExit);
+  window.addEventListener('pagehide',autoSyncExit);
+}
+
+/* ===== 设置 ===== */
+function renderSecUI(){
+  const enc=isEnc();
+  $('#secPlainUI').classList.toggle('hidden',enc);
+  $('#secEncUI').classList.toggle('hidden',!enc);
+  $('#autoLockCard').classList.toggle('hidden',!enc);
+  $('#secModeDesc').textContent=enc?'当前为「主密码保护」模式，每次打开需输入主密码。':'当前为「免密」模式，打开即进入，无需密码。';
+}
+function bindSettings(){
+  $('#enableMpw').addEventListener('click',async()=>{
+    const m=$('#secPlainMsg');
+    const p1=$('#setNewMpw').value,p2=$('#setNewMpw2').value;
+    if(p1.length<8){m.className='msg err';m.textContent='主密码至少 8 位。';return;}
+    if(p1!==p2){m.className='msg err';m.textContent='两次输入不一致。';return;}
+    try{
+      storage=await makeEncStorage(vault,p1);
+      saveStorage();
+      $('#setNewMpw').value='';$('#setNewMpw2').value='';
+      showLock();toast('已开启主密码保护，请用新主密码解锁验证');
+    }catch(e){m.className='msg err';m.textContent='开启失败：'+e.message;}
+  });
+  $('#changeMpw').addEventListener('click',async()=>{
+    const m=$('#changeMpwMsg');
+    const p1=$('#newMpw').value,p2=$('#newMpw2').value;
+    if(p1.length<8){m.className='msg err';m.textContent='新主密码至少 8 位。';return;}
+    if(p1!==p2){m.className='msg err';m.textContent='两次输入不一致。';return;}
+    try{
+      storage=await makeEncStorage(vault,p1); // 已重设 key/keyRaw 为数据密钥 DK
+      saveStorage();
+      $('#newMpw').value='';$('#newMpw2').value='';
+      m.className='msg ok';m.textContent='主密码已更新，数据已重新加密。';
+    }catch(e){m.className='msg err';m.textContent='更新失败：'+e.message;}
+  });
+  $('#disableMpw').addEventListener('click',async()=>{
+    const m=$('#secEncMsg');
+    const pw=$('#curMpw').value;
+    if(!pw){m.className='msg err';m.textContent='请输入当前主密码。';return;}
+    const ok=await tryUnlock(pw);
+    if(!ok){m.className='msg err';m.textContent='当前主密码错误，无法关闭保护。';return;}
+    try{
+      vault.updatedAt=nowISO();
+      const dkRaw=keyRaw;const dk=key||await CRYPTO.importAES(dkRaw);
+      const es=ensureDevSecret(storage);
+      const K=await CRYPTO.importAES(es.dev);
+      const w=await CRYPTO.wrapBytes(K,dkRaw);
+      const sealed=await CRYPTO.seal(dk,vault);
+      const st={v:2,dev:{device:true,wrapIv:w.iv,wrapped:w.data},dataIv:sealed.iv,data:sealed.data};
+      if(es.dvB64)st.dev.dv=es.dvB64;
+      storage=st;
+      saveStorage();
+      $('#curMpw').value='';m.className='msg ok';m.textContent='已切换为免密模式（数据仍加密存储）。';
+      enterApp();toast('已切换为免密模式');
+    }catch(e){m.className='msg err';m.textContent='关闭失败：'+e.message;}
+  });
+  $('#autoLockSel').addEventListener('change',()=>{
+    localStorage.setItem('vault.autolock',$('#autoLockSel').value);updateAutoLock();toast('自动锁定设置已保存');
+  });
+  $('#wipeBtn').addEventListener('click',()=>{
+    if(!confirm('确定清空本浏览器中保存的所有账号数据？此操作无法撤销。'))return;
+    localStorage.removeItem(storeKey);storage=null;key=null;vault=null;
+    if(window.NativeFile){try{window.NativeFile.save('');}catch(e){}}
+    location.reload();
+  });
+  const eyes={newMpwEye:'newMpw',newMpw2Eye:'newMpw2',setNewMpwEye:'setNewMpw',setNewMpw2Eye:'setNewMpw2',curMpwEye:'curMpw'};
+  for(const id in eyes)$('#'+id).addEventListener('click',()=>{const inp=$('#'+eyes[id]);inp.type=inp.type==='password'?'text':'password';});
+}
+
+/* ===== 组装渲染 ===== */
+function renderAll(){
+  if(state.view==='accts')renderAccounts();
+  if(state.view==='backup')renderBackup();
+}
+function init(){
+  initScreens();
+  loadZxcvbn();
+  bindAuth();
+  bindAppShell();
+  bindGenerator();
+  bindAcctList();
+  bindModal();
+  bindHist();
+  bindDetail();
+  bindLocalBackup();
+  bindBackup();
+  bindSettings();
+  ['keydown','click','mousemove','touchstart','scroll'].forEach(ev=>document.addEventListener(ev,bumpActivity,{passive:true}));
+  regenerate();
+  renderAll();
+}
+init();
+</script>
+</body>
+</html>
