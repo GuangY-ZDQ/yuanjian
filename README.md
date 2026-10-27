@@ -23,13 +23,14 @@
 ## 构建
 - **网页版**：`lark-cli apps +deploy --file-path ./账号管理工具.html --app-id <id>`
 - **Windows**：`npx electron-packager . 渊鉴 --platform=win32 --arch=x64 --out=dist --icon=yuanjian.ico --overwrite --asar`（需 wine64 写 exe 图标）
-- **安卓 APK**：aapt2 → javac --release 8 → d8 → zipalign → apksigner（详见 docs）
+- **安卓 APK**：进入 `android/`，`ANDROID_HOME=/path/to/sdk ./build.sh`（手打工具链 aapt2 → javac → d8 → zipalign → apksigner；详见 docs）
 
 详细步骤见 [docs/渊鉴-资料文档.md](docs/渊鉴-资料文档.md)。
 
 ## 目录结构
 ```
 ├── 账号管理工具.html   # 三端共用的唯一源码（单文件自包含）
+├── android/            # 安卓 APK 工程（AndroidManifest + MainActivity + res 图标 + build.sh）
 ├── desktop/            # Windows 桌面包壳（Electron main.js / preload.js / package.json）
 ├── design/             # LOGO 设计资产（SVG）
 ├── docs/               # 资料文档与构建手册
